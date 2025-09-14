@@ -31,7 +31,19 @@
     .section-title { display:flex; align-items:center; justify-content:space-between; gap:12px; }
     .mini-banner { width: 240px; max-width: 35%; }
     @media (max-width:700px){ .mini-banner{ width: 180px; } }
-  </style>
+  
+    @page { size: A4; margin: 16mm; }
+    @media print {
+      body { color: #000; background: #fff; }
+      .banner img { max-height: 80px; object-fit: contain; }
+      .actions, .consent, #items, #compute, #reset, #exportCsv, #exportJson, #exportPdf { display: none !important; }
+      .card { border: none; padding: 0; margin: 0 0 12px 0; }
+      .section-title { margin-top: 8px; }
+      #scoreTable, #itemsTable { page-break-inside: avoid; }
+      canvas#radar { max-width: 100%; }
+    }
+
+</style>
 </head>
 <body>
 
@@ -608,6 +620,7 @@
       <button id="reset" class="btn">Réinitialiser</button>
       <button id="exportCsv" class="btn">Exporter CSV</button>
       <button id="exportJson" class="btn">Exporter JSON</button>
+      <button id="exportPdf" class="btn">Exporter PDF</button>
     </div>
   </div>
 
@@ -780,6 +793,24 @@
       document.getElementById('reset').addEventListener('click', resetForm);
       document.getElementById('exportCsv').addEventListener('click', exportCSV);
       document.getElementById('exportJson').addEventListener('click', exportJSON);
+
+      function exportPDF(){
+        // Ensure scores are computed before printing
+        var anyAnswered = document.querySelector('input[type="radio"]:checked');
+        if (!anyAnswered) {
+          alert("Remplissez le questionnaire et calculez les scores avant d'exporter en PDF.");
+          return;
+        }
+        // If results not computed yet, compute first
+        if (document.getElementById('avg').textContent === '—') {
+          var res = computeScores(); 
+          if (res) updateUI(res);
+          else return;
+        }
+        window.print();
+      }
+      document.getElementById('exportPdf').addEventListener('click', exportPDF);
+
     })();
   </script>
 </body>
