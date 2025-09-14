@@ -1,6 +1,6 @@
 {
   "instrument": "CMP – Compétences Mentales de Performances (inspiré OMSAT-4)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "language": "fr",
   "scale": {
     "min": 1,
@@ -383,14 +383,5 @@
       "text": "Les critiques me paralysent au lieu de m’aider.",
       "reverse": true
     }
-  ],
-  "scoring": {
-    "reverse_rule": "score' = 8 - score",
-    "dimension_aggregation": "moyenne des items par dimension (arrondi à 2 décimales)",
-    "global_score": "moyenne des 10 dimensions"
-  },
-  "consent": {
-    "title": "Confidentialité & consentement",
-    "text": "Vos réponses restent confidentielles. Les résultats servent à une démarche d’accompagnement en préparation mentale. Vous pouvez demander la suppression de vos données à tout moment."
-  }
+  ]
 }
