@@ -1,0 +1,396 @@
+{
+  "instrument": "CMP – Compétences Mentales de Performances (inspiré OMSAT-4)",
+  "version": "1.0.0",
+  "language": "fr",
+  "scale": {
+    "min": 1,
+    "max": 7,
+    "anchors": [
+      "Pas du tout d’accord",
+      "Tout à fait d’accord"
+    ]
+  },
+  "dimensions": [
+    "Estime de soi",
+    "Énergie",
+    "Émotions",
+    "Confiance en soi",
+    "Motivation",
+    "Concentration",
+    "Communication",
+    "Objectifs & persévérance",
+    "Organisation",
+    "Résilience"
+  ],
+  "items": [
+    {
+      "id": "ES1",
+      "dimension": "Estime de soi",
+      "text": "Je suis fier(ère) de ce que j’accomplis au quotidien.",
+      "reverse": false
+    },
+    {
+      "id": "ES2",
+      "dimension": "Estime de soi",
+      "text": "Je me sens souvent moins compétent(e) que les autres.",
+      "reverse": true
+    },
+    {
+      "id": "ES3",
+      "dimension": "Estime de soi",
+      "text": "Je reconnais mes qualités et mes progrès.",
+      "reverse": false
+    },
+    {
+      "id": "ES4",
+      "dimension": "Estime de soi",
+      "text": "J’ai tendance à minimiser mes réussites.",
+      "reverse": true
+    },
+    {
+      "id": "ES5",
+      "dimension": "Estime de soi",
+      "text": "Je mérite la réussite à laquelle j’aspire.",
+      "reverse": false
+    },
+    {
+      "id": "ES6",
+      "dimension": "Estime de soi",
+      "text": "Un échec remet facilement en cause ma valeur.",
+      "reverse": true
+    },
+    {
+      "id": "EN1",
+      "dimension": "Énergie",
+      "text": "Je dispose d’assez d’énergie pour tenir mes engagements.",
+      "reverse": false
+    },
+    {
+      "id": "EN2",
+      "dimension": "Énergie",
+      "text": "Je me sens souvent à court de vitalité.",
+      "reverse": true
+    },
+    {
+      "id": "EN3",
+      "dimension": "Énergie",
+      "text": "Je sais me dynamiser avant un moment important.",
+      "reverse": false
+    },
+    {
+      "id": "EN4",
+      "dimension": "Énergie",
+      "text": "Je peine à récupérer après un effort.",
+      "reverse": true
+    },
+    {
+      "id": "EN5",
+      "dimension": "Énergie",
+      "text": "Mon niveau d’énergie est stable sur la journée.",
+      "reverse": false
+    },
+    {
+      "id": "EN6",
+      "dimension": "Énergie",
+      "text": "La fatigue me fait abandonner trop vite.",
+      "reverse": true
+    },
+    {
+      "id": "EM1",
+      "dimension": "Émotions",
+      "text": "Je garde mon calme dans les moments difficiles.",
+      "reverse": false
+    },
+    {
+      "id": "EM2",
+      "dimension": "Émotions",
+      "text": "Mes émotions me submergent et nuisent à ma performance.",
+      "reverse": true
+    },
+    {
+      "id": "EM3",
+      "dimension": "Émotions",
+      "text": "J’identifie ce que je ressens et j’en fais un atout.",
+      "reverse": false
+    },
+    {
+      "id": "EM4",
+      "dimension": "Émotions",
+      "text": "Le stress me bloque lorsque l’enjeu est élevé.",
+      "reverse": true
+    },
+    {
+      "id": "EM5",
+      "dimension": "Émotions",
+      "text": "Je régule rapidement une émotion intense.",
+      "reverse": false
+    },
+    {
+      "id": "EM6",
+      "dimension": "Émotions",
+      "text": "La peur me fait éviter certaines situations utiles.",
+      "reverse": true
+    },
+    {
+      "id": "CS1",
+      "dimension": "Confiance en soi",
+      "text": "Je crois en mes capacités même sous pression.",
+      "reverse": false
+    },
+    {
+      "id": "CS2",
+      "dimension": "Confiance en soi",
+      "text": "Je doute facilement de moi face aux obstacles.",
+      "reverse": true
+    },
+    {
+      "id": "CS3",
+      "dimension": "Confiance en soi",
+      "text": "Je me sens capable d’apprendre ce qui me manque.",
+      "reverse": false
+    },
+    {
+      "id": "CS4",
+      "dimension": "Confiance en soi",
+      "text": "Une erreur suffit à entamer fortement ma confiance.",
+      "reverse": true
+    },
+    {
+      "id": "CS5",
+      "dimension": "Confiance en soi",
+      "text": "Je prends des initiatives même si tout n’est pas parfait.",
+      "reverse": false
+    },
+    {
+      "id": "CS6",
+      "dimension": "Confiance en soi",
+      "text": "Je préfère ne pas essayer si le risque d’échec existe.",
+      "reverse": true
+    },
+    {
+      "id": "MO1",
+      "dimension": "Motivation",
+      "text": "Je connais clairement mes raisons d’agir.",
+      "reverse": false
+    },
+    {
+      "id": "MO2",
+      "dimension": "Motivation",
+      "text": "Mon envie fluctue au point de freiner mes actions.",
+      "reverse": true
+    },
+    {
+      "id": "MO3",
+      "dimension": "Motivation",
+      "text": "Je persévère même quand l’effort devient inconfortable.",
+      "reverse": false
+    },
+    {
+      "id": "MO4",
+      "dimension": "Motivation",
+      "text": "Je repousse souvent ce qui est important pour moi.",
+      "reverse": true
+    },
+    {
+      "id": "MO5",
+      "dimension": "Motivation",
+      "text": "Je transforme mes objectifs en étapes motivantes.",
+      "reverse": false
+    },
+    {
+      "id": "MO6",
+      "dimension": "Motivation",
+      "text": "Quand la gratification est lointaine, je relâche mes efforts.",
+      "reverse": true
+    },
+    {
+      "id": "CO1",
+      "dimension": "Concentration",
+      "text": "Je reste focalisé(e) malgré les distractions.",
+      "reverse": false
+    },
+    {
+      "id": "CO2",
+      "dimension": "Concentration",
+      "text": "Je perds facilement le fil lors d’une tâche.",
+      "reverse": true
+    },
+    {
+      "id": "CO3",
+      "dimension": "Concentration",
+      "text": "Je sais ramener mon attention quand elle dérive.",
+      "reverse": false
+    },
+    {
+      "id": "CO4",
+      "dimension": "Concentration",
+      "text": "Les notifications ou pensées parasites me coupent souvent.",
+      "reverse": true
+    },
+    {
+      "id": "CO5",
+      "dimension": "Concentration",
+      "text": "Je planifie des plages sans interruption.",
+      "reverse": false
+    },
+    {
+      "id": "CO6",
+      "dimension": "Concentration",
+      "text": "Je me disperse quand la tâche devient monotone.",
+      "reverse": true
+    },
+    {
+      "id": "CM1",
+      "dimension": "Communication",
+      "text": "J’exprime clairement mes idées à l’oral.",
+      "reverse": false
+    },
+    {
+      "id": "CM2",
+      "dimension": "Communication",
+      "text": "Mon langage corporel contredit parfois mon message.",
+      "reverse": true
+    },
+    {
+      "id": "CM3",
+      "dimension": "Communication",
+      "text": "J’adapte le ton et le rythme de ma voix à la situation.",
+      "reverse": false
+    },
+    {
+      "id": "CM4",
+      "dimension": "Communication",
+      "text": "J’évite les échanges importants par crainte d’incompréhension.",
+      "reverse": true
+    },
+    {
+      "id": "CM5",
+      "dimension": "Communication",
+      "text": "Je fais preuve d’écoute active et je reformule.",
+      "reverse": false
+    },
+    {
+      "id": "CM6",
+      "dimension": "Communication",
+      "text": "En situation stressante, mon message devient confus.",
+      "reverse": true
+    },
+    {
+      "id": "OP1",
+      "dimension": "Objectifs & persévérance",
+      "text": "Je me fixe des objectifs précis et mesurables.",
+      "reverse": false
+    },
+    {
+      "id": "OP2",
+      "dimension": "Objectifs & persévérance",
+      "text": "J’abandonne si les résultats tardent à venir.",
+      "reverse": true
+    },
+    {
+      "id": "OP3",
+      "dimension": "Objectifs & persévérance",
+      "text": "Je découpe mes buts en étapes atteignables.",
+      "reverse": false
+    },
+    {
+      "id": "OP4",
+      "dimension": "Objectifs & persévérance",
+      "text": "Je change souvent d’objectif sans raison solide.",
+      "reverse": true
+    },
+    {
+      "id": "OP5",
+      "dimension": "Objectifs & persévérance",
+      "text": "Je suis persévérant(e) face aux imprévus.",
+      "reverse": false
+    },
+    {
+      "id": "OP6",
+      "dimension": "Objectifs & persévérance",
+      "text": "Je baisse les bras quand c’est plus dur que prévu.",
+      "reverse": true
+    },
+    {
+      "id": "OR1",
+      "dimension": "Organisation",
+      "text": "Je planifie et priorise mes tâches efficacement.",
+      "reverse": false
+    },
+    {
+      "id": "OR2",
+      "dimension": "Organisation",
+      "text": "Je m’éparpille facilement et perds le fil.",
+      "reverse": true
+    },
+    {
+      "id": "OR3",
+      "dimension": "Organisation",
+      "text": "J’utilise des outils (agenda, checklists, trackers).",
+      "reverse": false
+    },
+    {
+      "id": "OR4",
+      "dimension": "Organisation",
+      "text": "Je commence sans clarifier quoi faire exactement.",
+      "reverse": true
+    },
+    {
+      "id": "OR5",
+      "dimension": "Organisation",
+      "text": "Je prévois des temps de revue pour m’ajuster.",
+      "reverse": false
+    },
+    {
+      "id": "OR6",
+      "dimension": "Organisation",
+      "text": "Je manque de structure quand la charge augmente.",
+      "reverse": true
+    },
+    {
+      "id": "RE1",
+      "dimension": "Résilience",
+      "text": "Je rebondis rapidement après un échec.",
+      "reverse": false
+    },
+    {
+      "id": "RE2",
+      "dimension": "Résilience",
+      "text": "Une difficulté me décourage pour longtemps.",
+      "reverse": true
+    },
+    {
+      "id": "RE3",
+      "dimension": "Résilience",
+      "text": "Je transforme les obstacles en apprentissages.",
+      "reverse": false
+    },
+    {
+      "id": "RE4",
+      "dimension": "Résilience",
+      "text": "Face à l’adversité, j’ai du mal à repartir.",
+      "reverse": true
+    },
+    {
+      "id": "RE5",
+      "dimension": "Résilience",
+      "text": "Je demande de l’aide ou ajuste ma stratégie quand il le faut.",
+      "reverse": false
+    },
+    {
+      "id": "RE6",
+      "dimension": "Résilience",
+      "text": "Les critiques me paralysent au lieu de m’aider.",
+      "reverse": true
+    }
+  ],
+  "scoring": {
+    "reverse_rule": "score' = 8 - score",
+    "dimension_aggregation": "moyenne des items par dimension (arrondi à 2 décimales)",
+    "global_score": "moyenne des 10 dimensions"
+  },
+  "consent": {
+    "title": "Confidentialité & consentement",
+    "text": "Vos réponses restent confidentielles. Les résultats servent à une démarche d’accompagnement en préparation mentale. Vous pouvez demander la suppression de vos données à tout moment."
+  }
+}
