@@ -1,19 +1,34 @@
-CMP Patch Universal v1
-======================
+CMP – Hotfix PDF (logo centré + résultats uniquement) • v1
+==========================================================
 
-Ce patch corrige ton questionnaire CMP :
-- Supprime les boutons "Exporter CSV" et "Exporter JSON"
-- Cache la section "Détail par item / thème" (ni visible ni exportée en PDF)
-- Ajoute un seul bouton "Exporter PDF" (fixe en haut à droite)
+Ce patch n'écrase PAS votre page. Il agit "par dessus" :
+- supprime les boutons Exporter CSV/JSON s'ils existent
+- masque définitivement le bloc "Détail par item" (écran + PDF)
+- ajoute/garantit le bouton "Exporter PDF" si besoin
+- exporte UNIQUEMENT la carte "Résultats"
+- centre votre logo (bandeau) en haut du PDF
+- pagine automatiquement si les résultats dépassent une page
 
-Installation :
-1. Copie `cmp_patch_hide_details.js` et `export-pdf.js` dans le même dossier que ta page CMP (HTML).
-2. Dans ton HTML CMP (avant </body>), ajoute :
+Installation (GitHub Pages) — 30 secondes
+-----------------------------------------
+1) Déposez ces 2 fichiers à la RACINE de votre dépôt :
+   - cmp-hotfix.css
+   - cmp-hotfix.js
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="export-pdf.js"></script>
-<script src="cmp_patch_hide_details.js"></script>
+2) Ouvrez votre fichier : CMP_academie_performances.html
+   et juste AVANT </head>, ajoutez :
+     <link rel="stylesheet" href="cmp-hotfix.css">
 
-3. Recharge la page. Tu verras uniquement le bouton Exporter PDF, et les détails auront disparu.
+   puis juste AVANT </body>, ajoutez :
+     <script src="cmp-hotfix.js"></script>
 
+3) Sauvegardez, poussez sur la branche principale,
+   puis forcez le rafraîchissement (Cmd/Ctrl + Shift + R).
+
+Aucune autre manipulation nécessaire.
+
+Si votre page n'a pas exactement le titre H2 "Résultats",
+le script basculera automatiquement sur la carte contenant #scoreTable.
+
+—
+Support : si vous souhaitez une version "page de garde PDF" (logo centré + titre + participant + date en page 1, puis les résultats en page 2), demandez-moi et je vous fournis un hotfix v2.
