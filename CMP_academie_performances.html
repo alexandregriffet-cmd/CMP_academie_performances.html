@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CMP – Compétences Mentales de Performances | Académie de Performances</title>
-  <meta name="description" content="CMP – Questionnaire de compétences mentales (inspiré OMSAT-4), par Alexandre Griffet." />
+  <title>CMP – Compétences Mentales de Performances | Super-stable</title>
   <style>
     :root{ --line:#e6e6e9; --muted:#596073; --ink:#0a0a0a; --bg:#ffffff; }
     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.5; color: var(--ink); background: var(--bg); }
@@ -31,21 +30,17 @@
     .banner img { width: 100%; height: auto; display: block; }
     .section-title { display:flex; align-items:center; justify-content:space-between; gap:12px; }
     .mini-banner { width: 240px; max-width: 35%; }
-    .error { color:#b00020; background:#fff1f1; border:1px solid #f5c2c7; padding:10px; border-radius:8px; }
-    @media (max-width:700px){ .mini-banner{ width: 180px; } }
   </style>
 </head>
 <body>
-
   <div class="banner" style="margin-bottom:16px">
-    <img src="assets/bandeau.jpg" alt="Académie de Performances – Alexandre Griffet" />
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh3lYyQAAAABJRU5ErkJggg==" alt="Académie de Performances – Bandeau" />
   </div>
 
   <h1>CMP – Compétences Mentales de Performances</h1>
   <div class="muted">Auto-évaluation des compétences mentales (inspiré OMSAT-4)</div>
 
   <div id="app" class="card">
-    <div id="err" class="error" style="display:none"></div>
     <div class="consent" id="consentBox"></div>
     <div class="flex" style="margin-top:8px">
       <div><label>Identifiant (optionnel) : <input id="pid" placeholder="Prénom ou code" /></label></div>
@@ -72,19 +67,16 @@
     <div class="section-title">
       <h2>Résultats</h2>
       <div class="mini-banner">
-        <img src="assets/bandeau.jpg" alt="Académie de Performances – Résultats" />
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh3lYyQAAAABJRU5ErkJggg==" alt="Académie de Performances – Résultats" />
       </div>
     </div>
-
     <div class="scores" style="margin-top:8px">
       <table id="scoreTable">
         <thead><tr id="scoreHead"></tr></thead>
         <tbody><tr id="scoreRow"></tr></tbody>
       </table>
     </div>
-
     <canvas id="radar" width="600" height="420" style="margin-top:16px;"></canvas>
-
     <div class="scores" style="margin-top:16px">
       <h3 style="margin:0 0 8px">Détail par item (% après inversion si nécessaire)</h3>
       <table id="itemsTable">
@@ -92,44 +84,48 @@
         <tbody id="itemsBody"></tbody>
       </table>
     </div>
-
     <div class="footer">Échelle 1–7 ; inversion si <em>(inversé)</em> : <code>score' = 8 − score</code>. Les pourcentages sont normalisés sur 7 points (x/7×100).</div>
   </div>
 
-  <script id="questions-data" type="application/json">{"instrument": "CMP – Compétences Mentales de Performances (inspiré OMSAT-4)", "version": "1.0.1", "language": "fr", "scale": {"min": 1, "max": 7, "anchors": ["Pas du tout d’accord", "Tout à fait d’accord"]}, "dimensions": ["Estime de soi", "Énergie", "Émotions", "Confiance en soi", "Motivation", "Concentration", "Communication", "Objectifs & persévérance", "Organisation", "Résilience"], "items": [{"id": "ES1", "dimension": "Estime de soi", "text": "Je suis fier(ère) de ce que j’accomplis au quotidien.", "reverse": false}, {"id": "ES2", "dimension": "Estime de soi", "text": "Je me sens souvent moins compétent(e) que les autres.", "reverse": true}, {"id": "ES3", "dimension": "Estime de soi", "text": "Je reconnais mes qualités et mes progrès.", "reverse": false}, {"id": "ES4", "dimension": "Estime de soi", "text": "J’ai tendance à minimiser mes réussites.", "reverse": true}, {"id": "ES5", "dimension": "Estime de soi", "text": "Je mérite la réussite à laquelle j’aspire.", "reverse": false}, {"id": "ES6", "dimension": "Estime de soi", "text": "Un échec remet facilement en cause ma valeur.", "reverse": true}, {"id": "EN1", "dimension": "Énergie", "text": "Je dispose d’assez d’énergie pour tenir mes engagements.", "reverse": false}, {"id": "EN2", "dimension": "Énergie", "text": "Je me sens souvent à court de vitalité.", "reverse": true}, {"id": "EN3", "dimension": "Énergie", "text": "Je sais me dynamiser avant un moment important.", "reverse": false}, {"id": "EN4", "dimension": "Énergie", "text": "Je peine à récupérer après un effort.", "reverse": true}, {"id": "EN5", "dimension": "Énergie", "text": "Mon niveau d’énergie est stable sur la journée.", "reverse": false}, {"id": "EN6", "dimension": "Énergie", "text": "La fatigue me fait abandonner trop vite.", "reverse": true}, {"id": "EM1", "dimension": "Émotions", "text": "Je garde mon calme dans les moments difficiles.", "reverse": false}, {"id": "EM2", "dimension": "Émotions", "text": "Mes émotions me submergent et nuisent à ma performance.", "reverse": true}, {"id": "EM3", "dimension": "Émotions", "text": "J’identifie ce que je ressens et j’en fais un atout.", "reverse": false}, {"id": "EM4", "dimension": "Émotions", "text": "Le stress me bloque lorsque l’enjeu est élevé.", "reverse": true}, {"id": "EM5", "dimension": "Émotions", "text": "Je régule rapidement une émotion intense.", "reverse": false}, {"id": "EM6", "dimension": "Émotions", "text": "La peur me fait éviter certaines situations utiles.", "reverse": true}, {"id": "CS1", "dimension": "Confiance en soi", "text": "Je crois en mes capacités même sous pression.", "reverse": false}, {"id": "CS2", "dimension": "Confiance en soi", "text": "Je doute facilement de moi face aux obstacles.", "reverse": true}, {"id": "CS3", "dimension": "Confiance en soi", "text": "Je me sens capable d’apprendre ce qui me manque.", "reverse": false}, {"id": "CS4", "dimension": "Confiance en soi", "text": "Une erreur suffit à entamer fortement ma confiance.", "reverse": true}, {"id": "CS5", "dimension": "Confiance en soi", "text": "Je prends des initiatives même si tout n’est pas parfait.", "reverse": false}, {"id": "CS6", "dimension": "Confiance en soi", "text": "Je préfère ne pas essayer si le risque d’échec existe.", "reverse": true}, {"id": "MO1", "dimension": "Motivation", "text": "Je connais clairement mes raisons d’agir.", "reverse": false}, {"id": "MO2", "dimension": "Motivation", "text": "Mon envie fluctue au point de freiner mes actions.", "reverse": true}, {"id": "MO3", "dimension": "Motivation", "text": "Je persévère même quand l’effort devient inconfortable.", "reverse": false}, {"id": "MO4", "dimension": "Motivation", "text": "Je repousse souvent ce qui est important pour moi.", "reverse": true}, {"id": "MO5", "dimension": "Motivation", "text": "Je transforme mes objectifs en étapes motivantes.", "reverse": false}, {"id": "MO6", "dimension": "Motivation", "text": "Quand la gratification est lointaine, je relâche mes efforts.", "reverse": true}, {"id": "CO1", "dimension": "Concentration", "text": "Je reste focalisé(e) malgré les distractions.", "reverse": false}, {"id": "CO2", "dimension": "Concentration", "text": "Je perds facilement le fil lors d’une tâche.", "reverse": true}, {"id": "CO3", "dimension": "Concentration", "text": "Je sais ramener mon attention quand elle dérive.", "reverse": false}, {"id": "CO4", "dimension": "Concentration", "text": "Les notifications ou pensées parasites me coupent souvent.", "reverse": true}, {"id": "CO5", "dimension": "Concentration", "text": "Je planifie des plages sans interruption.", "reverse": false}, {"id": "CO6", "dimension": "Concentration", "text": "Je me disperse quand la tâche devient monotone.", "reverse": true}, {"id": "CM1", "dimension": "Communication", "text": "J’exprime clairement mes idées à l’oral.", "reverse": false}, {"id": "CM2", "dimension": "Communication", "text": "Mon langage corporel contredit parfois mon message.", "reverse": true}, {"id": "CM3", "dimension": "Communication", "text": "J’adapte le ton et le rythme de ma voix à la situation.", "reverse": false}, {"id": "CM4", "dimension": "Communication", "text": "J’évite les échanges importants par crainte d’incompréhension.", "reverse": true}, {"id": "CM5", "dimension": "Communication", "text": "Je fais preuve d’écoute active et je reformule.", "reverse": false}, {"id": "CM6", "dimension": "Communication", "text": "En situation stressante, mon message devient confus.", "reverse": true}, {"id": "OP1", "dimension": "Objectifs & persévérance", "text": "Je me fixe des objectifs précis et mesurables.", "reverse": false}, {"id": "OP2", "dimension": "Objectifs & persévérance", "text": "J’abandonne si les résultats tardent à venir.", "reverse": true}, {"id": "OP3", "dimension": "Objectifs & persévérance", "text": "Je découpe mes buts en étapes atteignables.", "reverse": false}, {"id": "OP4", "dimension": "Objectifs & persévérance", "text": "Je change souvent d’objectif sans raison solide.", "reverse": true}, {"id": "OP5", "dimension": "Objectifs & persévérance", "text": "Je suis persévérant(e) face aux imprévus.", "reverse": false}, {"id": "OP6", "dimension": "Objectifs & persévérance", "text": "Je baisse les bras quand c’est plus dur que prévu.", "reverse": true}, {"id": "OR1", "dimension": "Organisation", "text": "Je planifie et priorise mes tâches efficacement.", "reverse": false}, {"id": "OR2", "dimension": "Organisation", "text": "Je m’éparpille facilement et perds le fil.", "reverse": true}, {"id": "OR3", "dimension": "Organisation", "text": "J’utilise des outils (agenda, checklists, trackers).", "reverse": false}, {"id": "OR4", "dimension": "Organisation", "text": "Je commence sans clarifier quoi faire exactement.", "reverse": true}, {"id": "OR5", "dimension": "Organisation", "text": "Je prévois des temps de revue pour m’ajuster.", "reverse": false}, {"id": "OR6", "dimension": "Organisation", "text": "Je manque de structure quand la charge augmente.", "reverse": true}, {"id": "RE1", "dimension": "Résilience", "text": "Je rebondis rapidement après un échec.", "reverse": false}, {"id": "RE2", "dimension": "Résilience", "text": "Une difficulté me décourage pour longtemps.", "reverse": true}, {"id": "RE3", "dimension": "Résilience", "text": "Je transforme les obstacles en apprentissages.", "reverse": false}, {"id": "RE4", "dimension": "Résilience", "text": "Face à l’adversité, j’ai du mal à repartir.", "reverse": true}, {"id": "RE5", "dimension": "Résilience", "text": "Je demande de l’aide ou ajuste ma stratégie quand il le faut.", "reverse": false}, {"id": "RE6", "dimension": "Résilience", "text": "Les critiques me paralysent au lieu de m’aider.", "reverse": true}]}</script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script id="cmp-data" type="application/json">{"instrument": "CMP – Compétences Mentales de Performances (inspiré OMSAT-4)", "version": "1.0.4", "language": "fr", "scale": {"min": 1, "max": 7, "anchors": ["Pas du tout d’accord", "Tout à fait d’accord"]}, "dimensions": ["Estime de soi", "Énergie", "Émotions", "Confiance en soi", "Motivation", "Concentration", "Communication", "Objectifs & persévérance", "Organisation", "Résilience"], "items": [{"id": "ES1", "dimension": "Estime de soi", "text": "Je suis fier(ère) de ce que j’accomplis au quotidien.", "reverse": false}, {"id": "ES2", "dimension": "Estime de soi", "text": "Je me sens souvent moins compétent(e) que les autres.", "reverse": true}, {"id": "ES3", "dimension": "Estime de soi", "text": "Je reconnais mes qualités et mes progrès.", "reverse": false}, {"id": "ES4", "dimension": "Estime de soi", "text": "J’ai tendance à minimiser mes réussites.", "reverse": true}, {"id": "ES5", "dimension": "Estime de soi", "text": "Je mérite la réussite à laquelle j’aspire.", "reverse": false}, {"id": "ES6", "dimension": "Estime de soi", "text": "Un échec remet facilement en cause ma valeur.", "reverse": true}, {"id": "EN1", "dimension": "Énergie", "text": "Je dispose d’assez d’énergie pour tenir mes engagements.", "reverse": false}, {"id": "EN2", "dimension": "Énergie", "text": "Je me sens souvent à court de vitalité.", "reverse": true}, {"id": "EN3", "dimension": "Énergie", "text": "Je sais me dynamiser avant un moment important.", "reverse": false}, {"id": "EN4", "dimension": "Énergie", "text": "Je peine à récupérer après un effort.", "reverse": true}, {"id": "EN5", "dimension": "Énergie", "text": "Mon niveau d’énergie est stable sur la journée.", "reverse": false}, {"id": "EN6", "dimension": "Énergie", "text": "La fatigue me fait abandonner trop vite.", "reverse": true}, {"id": "EM1", "dimension": "Émotions", "text": "Je garde mon calme dans les moments difficiles.", "reverse": false}, {"id": "EM2", "dimension": "Émotions", "text": "Mes émotions me submergent et nuisent à ma performance.", "reverse": true}, {"id": "EM3", "dimension": "Émotions", "text": "J’identifie ce que je ressens et j’en fais un atout.", "reverse": false}, {"id": "EM4", "dimension": "Émotions", "text": "Le stress me bloque lorsque l’enjeu est élevé.", "reverse": true}, {"id": "EM5", "dimension": "Émotions", "text": "Je régule rapidement une émotion intense.", "reverse": false}, {"id": "EM6", "dimension": "Émotions", "text": "La peur me fait éviter certaines situations utiles.", "reverse": true}, {"id": "CS1", "dimension": "Confiance en soi", "text": "Je crois en mes capacités même sous pression.", "reverse": false}, {"id": "CS2", "dimension": "Confiance en soi", "text": "Je doute facilement de moi face aux obstacles.", "reverse": true}, {"id": "CS3", "dimension": "Confiance en soi", "text": "Je me sens capable d’apprendre ce qui me manque.", "reverse": false}, {"id": "CS4", "dimension": "Confiance en soi", "text": "Une erreur suffit à entamer fortement ma confiance.", "reverse": true}, {"id": "CS5", "dimension": "Confiance en soi", "text": "Je prends des initiatives même si tout n’est pas parfait.", "reverse": false}, {"id": "CS6", "dimension": "Confiance en soi", "text": "Je préfère ne pas essayer si le risque d’échec existe.", "reverse": true}, {"id": "MO1", "dimension": "Motivation", "text": "Je connais clairement mes raisons d’agir.", "reverse": false}, {"id": "MO2", "dimension": "Motivation", "text": "Mon envie fluctue au point de freiner mes actions.", "reverse": true}, {"id": "MO3", "dimension": "Motivation", "text": "Je persévère même quand l’effort devient inconfortable.", "reverse": false}, {"id": "MO4", "dimension": "Motivation", "text": "Je repousse souvent ce qui est important pour moi.", "reverse": true}, {"id": "MO5", "dimension": "Motivation", "text": "Je transforme mes objectifs en étapes motivantes.", "reverse": false}, {"id": "MO6", "dimension": "Motivation", "text": "Quand la gratification est lointaine, je relâche mes efforts.", "reverse": true}, {"id": "CO1", "dimension": "Concentration", "text": "Je reste focalisé(e) malgré les distractions.", "reverse": false}, {"id": "CO2", "dimension": "Concentration", "text": "Je perds facilement le fil lors d’une tâche.", "reverse": true}, {"id": "CO3", "dimension": "Concentration", "text": "Je sais ramener mon attention quand elle dérive.", "reverse": false}, {"id": "CO4", "dimension": "Concentration", "text": "Les notifications ou pensées parasites me coupent souvent.", "reverse": true}, {"id": "CO5", "dimension": "Concentration", "text": "Je planifie des plages sans interruption.", "reverse": false}, {"id": "CO6", "dimension": "Concentration", "text": "Je me disperse quand la tâche devient monotone.", "reverse": true}, {"id": "CM1", "dimension": "Communication", "text": "J’exprime clairement mes idées à l’oral.", "reverse": false}, {"id": "CM2", "dimension": "Communication", "text": "Mon langage corporel contredit parfois mon message.", "reverse": true}, {"id": "CM3", "dimension": "Communication", "text": "J’adapte le ton et le rythme de ma voix à la situation.", "reverse": false}, {"id": "CM4", "dimension": "Communication", "text": "J’évite les échanges importants par crainte d’incompréhension.", "reverse": true}, {"id": "CM5", "dimension": "Communication", "text": "Je fais preuve d’écoute active et je reformule.", "reverse": false}, {"id": "CM6", "dimension": "Communication", "text": "En situation stressante, mon message devient confus.", "reverse": true}, {"id": "OP1", "dimension": "Objectifs & persévérance", "text": "Je me fixe des objectifs précis et mesurables.", "reverse": false}, {"id": "OP2", "dimension": "Objectifs & persévérance", "text": "J’abandonne si les résultats tardent à venir.", "reverse": true}, {"id": "OP3", "dimension": "Objectifs & persévérance", "text": "Je découpe mes buts en étapes atteignables.", "reverse": false}, {"id": "OP4", "dimension": "Objectifs & persévérance", "text": "Je change souvent d’objectif sans raison solide.", "reverse": true}, {"id": "OP5", "dimension": "Objectifs & persévérance", "text": "Je suis persévérant(e) face aux imprévus.", "reverse": false}, {"id": "OP6", "dimension": "Objectifs & persévérance", "text": "Je baisse les bras quand c’est plus dur que prévu.", "reverse": true}, {"id": "OR1", "dimension": "Organisation", "text": "Je planifie et priorise mes tâches efficacement.", "reverse": false}, {"id": "OR2", "dimension": "Organisation", "text": "Je m’éparpille facilement et perds le fil.", "reverse": true}, {"id": "OR3", "dimension": "Organisation", "text": "J’utilise des outils (agenda, checklists, trackers).", "reverse": false}, {"id": "OR4", "dimension": "Organisation", "text": "Je commence sans clarifier quoi faire exactement.", "reverse": true}, {"id": "OR5", "dimension": "Organisation", "text": "Je prévois des temps de revue pour m’ajuster.", "reverse": false}, {"id": "OR6", "dimension": "Organisation", "text": "Je manque de structure quand la charge augmente.", "reverse": true}, {"id": "RE1", "dimension": "Résilience", "text": "Je rebondis rapidement après un échec.", "reverse": false}, {"id": "RE2", "dimension": "Résilience", "text": "Une difficulté me décourage pour longtemps.", "reverse": true}, {"id": "RE3", "dimension": "Résilience", "text": "Je transforme les obstacles en apprentissages.", "reverse": false}, {"id": "RE4", "dimension": "Résilience", "text": "Face à l’adversité, j’ai du mal à repartir.", "reverse": true}, {"id": "RE5", "dimension": "Résilience", "text": "Je demande de l’aide ou ajuste ma stratégie quand il le faut.", "reverse": false}, {"id": "RE6", "dimension": "Résilience", "text": "Les critiques me paralysent au lieu de m’aider.", "reverse": true}], "consent": {"title": "Confidentialité & consentement", "text": "Vos réponses restent confidentielles. Vous pouvez demander la suppression de vos données à tout moment."}}</script>
   <script>
+    // Rendu 100% DOM (sans template strings) pour éviter tout problème d'échappement.
     const state = { meta:null, items:[], chart:null };
 
-    async function load() {
-      let data = null;
-      try {
-        const res = await fetch('questions.json', { cache: 'no-store' });
-        if (!res.ok) throw new Error('HTTP '+res.status);
-        data = await res.json();
-        console.log('questions.json chargé');
-      } catch (e) {
-        console.warn('Échec du fetch questions.json, bascule sur JSON inline:', e);
-        try {
-          const inline = document.getElementById('questions-data').textContent;
-          data = JSON.parse(inline);
-          document.getElementById('err').style.display='block';
-          document.getElementById('err').innerText = "Note : chargement hors-ligne (questions embarquées).";
-        } catch (e2) {
-          document.getElementById('err').style.display='block';
-          document.getElementById('err').innerText = "Erreur de chargement des questions.";
-          return;
-        }
+    function el(tag, props={}, children=[]) {
+      const e = document.createElement(tag);
+      for (const k in props) {
+        if (k === 'className') e.className = props[k];
+        else if (k === 'text') e.textContent = props[k];
+        else e.setAttribute(k, props[k]);
       }
+      (Array.isArray(children) ? children : [children]).forEach(c => {
+        if (typeof c === 'string') e.appendChild(document.createTextNode(c));
+        else if (c) e.appendChild(c);
+      });
+      return e;
+    }
 
-      state.meta = data;
-      state.items = data.items;
-      document.getElementById('consentBox').innerHTML =
-        "<strong>"+data.consent.title+"</strong><br>"+data.consent.text;
-      document.getElementById('pdate').valueAsDate = new Date();
-      renderItems(data);
-      buildScoreTable(data.dimensions);
-      buildItemsTableHeader();
+    function load() {
+      try {
+        const inline = document.getElementById('cmp-data').textContent;
+        const data = JSON.parse(inline);
+        state.meta = data;
+        state.items = data.items;
+        document.getElementById('consentBox').innerHTML =
+          "<strong>"+data.consent.title+"</strong><br>"+data.consent.text;
+        document.getElementById('pdate').valueAsDate = new Date();
+        renderItems(data);
+        buildScoreTable(data.dimensions);
+        buildItemsTableHeader();
+        // Lazy-load Chart.js (non bloquant)
+        const s = document.createElement('script');
+        s.src = "https://cdn.jsdelivr.net/npm/chart.js";
+        s.onload = () => { /* ok */ };
+        document.body.appendChild(s);
+      } catch (e) {
+        alert("Erreur de chargement des données : " + e.message);
+      }
     }
 
     function renderItems(data) {
@@ -137,54 +133,62 @@
       wrap.innerHTML = '';
       const scaleMin = data.scale.min, scaleMax = data.scale.max;
       data.items.forEach(it => {
-        const div = document.createElement('div');
-        div.className = 'item';
-        div.innerHTML = `
-          <div class="dim">${it.dimension}</div>
-          <div><strong>${it.id}</strong> — ${it.text} ${it.reverse ? '<span class="muted">(inversé)</span>' : ''}</div>
-          <div class="scale" role="radiogroup" aria-label="${it.id}">
-            ${Array.from({length: scaleMax - scaleMin + 1}, (_,i)=>i+scaleMin).map(v => `
-              <label class="option">
-                <input type="radio" name="${it.id}" value="${v}"> ${v}
-              </label>
-            `).join('')}
-            <span class="muted">(${data.scale.anchors[0]} → ${data.scale.anchors[1]})</span>
-          </div>`;
-        wrap.appendChild(div);
+        const itemDiv = el('div', {className:'item'});
+        itemDiv.appendChild(el('div', {className:'dim', text: it.dimension}));
+        const title = el('div'); title.appendChild(el('strong', {text: it.id})); title.appendChild(document.createTextNode(' — ' + it.text + (it.reverse ? ' (inversé)' : '')));
+        itemDiv.appendChild(title);
+        const scale = el('div', {className:'scale', role:'radiogroup', 'aria-label': it.id});
+        for (let v=scaleMin; v<=scaleMax; v++){
+          const label = el('label', {className:'option'});
+          const input = el('input', {type:'radio', name: it.id, value: String(v)});
+          label.appendChild(input);
+          label.appendChild(document.createTextNode(' ' + v));
+          scale.appendChild(label);
+        }
+        scale.appendChild(el('span', {className:'muted', text:` (${data.scale.anchors[0]} → ${data.scale.anchors[1]})`}));
+        itemDiv.appendChild(scale);
+        wrap.appendChild(itemDiv);
       });
     }
 
     function buildScoreTable(dimensions){
       const head = document.getElementById('scoreHead');
       const row  = document.getElementById('scoreRow');
-      head.innerHTML = '<th>Participant</th>' + dimensions.map(d=>`<th>${d} (%)</th>`).join('') + '<th>Moyenne (%)</th>';
-      row.innerHTML  = '<td id="pidCell">—</td>' + dimensions.map((_,i)=>`<td id="d${i}">—</td>`).join('') + '<td id="avg">—</td>';
+      head.innerHTML = '';
+      row.innerHTML = '';
+      head.appendChild(el('th',{text:'Participant'}));
+      dimensions.forEach(d => head.appendChild(el('th',{text: d+' (%)'})));
+      head.appendChild(el('th',{text:'Moyenne (%)'}));
+      row.appendChild(el('td',{id:'pidCell', text:'—'}));
+      dimensions.forEach((_,i)=> row.appendChild(el('td',{id:'d'+i, text:'—'})));
+      row.appendChild(el('td',{id:'avg', text:'—'}));
     }
 
     function buildItemsTableHeader(){
       const head = document.getElementById('itemsHead');
-      head.innerHTML = '<th>Item</th><th>Dimension</th><th>Réponse (1–7)</th><th>Score ajusté</th><th>%</th>';
+      head.innerHTML='';
+      ['Item','Dimension','Réponse (1–7)','Score ajusté','%'].forEach(t=> head.appendChild(el('th',{text:t})));
     }
 
     function computeScores(){
       const dims = state.meta.dimensions;
-      const perDim = Object.fromEntries(dims.map(d=>[d, []]));
+      const perDim = {}; dims.forEach(d=> perDim[d]=[]);
       const itemRows = [];
       const min = state.meta.scale.min, max = state.meta.scale.max;
 
-      const getVal = name => {
-        const el = document.querySelector(`input[name="${name}"]:checked`);
+      function getVal(name){
+        const el = document.querySelector('input[name="'+name+'"]:checked');
         return el ? Number(el.value) : null;
-      };
+      }
 
-      let missing = [];
+      const missing = [];
       state.items.forEach(it=>{
         const v = getVal(it.id);
-        if (v==null) { missing.push(it.id); return; }
-        const adj = it.reverse ? ((max + 1) - v) : v; // 8 - v pour 1..7
+        if (v==null){ missing.push(it.id); return; }
+        const adj = it.reverse ? ((max + 1) - v) : v; // 8 - v
         perDim[it.dimension].push(adj);
-        const pct = Math.round((adj/7)*10000)/100; // %
-        itemRows.push({ id: it.id, dim: it.dimension, raw: v, adj, pct });
+        const pct = Math.round((adj/7)*10000)/100;
+        itemRows.push({id: it.id, dim: it.dimension, raw: v, adj: adj, pct: pct});
       });
 
       if (missing.length){
@@ -194,10 +198,10 @@
 
       const meansPct = dims.map(d=>{
         const arr = perDim[d];
-        const m = arr.reduce((a,b)=>a+b,0)/arr.length; // 1..7
-        return Math.round((m/7)*10000)/100; // en %
+        const m = arr.reduce((a,b)=>a+b,0)/arr.length;
+        return Math.round((m/7)*10000)/100;
       });
-      const globalPct = Math.round((meansPct.reduce((a,b)=>a+b,0)/meansPct.length)*100)/100; // %
+      const globalPct = Math.round((meansPct.reduce((a,b)=>a+b,0)/meansPct.length)*100)/100;
       return { meansPct, globalPct, itemRows };
     }
 
@@ -206,38 +210,37 @@
       document.getElementById('pidCell').textContent = document.getElementById('pid').value || '—';
       res.meansPct.forEach((v,i)=> document.getElementById('d'+i).textContent = v.toFixed(2));
       document.getElementById('avg').textContent = res.globalPct.toFixed(2);
-      drawStar(res.meansPct);
+      drawRadar(res.meansPct);
       renderItemsTable(res.itemRows);
     }
 
-    function drawStar(valuesPct){
+    function drawRadar(valuesPct){
+      // Si Chart.js n'est pas encore chargé, on retente après un court délai.
+      if (!window.Chart){
+        setTimeout(()=>drawRadar(valuesPct), 300);
+        return;
+      }
       const ctx = document.getElementById('radar');
       if (state.chart){ state.chart.destroy(); }
       state.chart = new Chart(ctx, {
         type: 'radar',
-        data: {
-          labels: state.meta.dimensions,
-          datasets: [{ label: 'Profil (%)', data: valuesPct, fill: true }]
-        },
-        options: {
-          responsive: true,
-          scales: { r: { suggestedMin: 0, suggestedMax: 100, ticks: { stepSize: 20 } } },
-          plugins: { legend: { display: false } }
-        }
+        data: { labels: state.meta.dimensions, datasets: [{ label: 'Profil (%)', data: valuesPct, fill: true }] },
+        options: { responsive: true, scales: { r: { suggestedMin: 0, suggestedMax: 100, ticks: { stepSize: 20 } } }, plugins: { legend: { display: false } } }
       });
     }
 
     function renderItemsTable(rows){
       const body = document.getElementById('itemsBody');
-      body.innerHTML = rows.map(r=>`
-        <tr>
-          <td>${r.id}</td>
-          <td>${r.dim}</td>
-          <td>${r.raw}</td>
-          <td>${r.adj}</td>
-          <td>${r.pct.toFixed(2)}%</td>
-        </tr>
-      `).join('');
+      body.innerHTML='';
+      rows.forEach(r=>{
+        const tr = el('tr');
+        tr.appendChild(el('td',{text:r.id}));
+        tr.appendChild(el('td',{text:r.dim}));
+        tr.appendChild(el('td',{text:String(r.raw)}));
+        tr.appendChild(el('td',{text:String(r.adj)}));
+        tr.appendChild(el('td',{text:r.pct.toFixed(2)}));
+        body.appendChild(tr);
+      });
     }
 
     function resetForm(){
@@ -256,7 +259,7 @@
       const headers = ['participant','date','contexte', ...state.meta.dimensions.map(d=>d+' (%)'),'moyenne (%)'];
       const values  = [pid, date, ctx, ...res.meansPct.map(v=>v.toFixed(2)), res.globalPct.toFixed(2)];
       let csv = headers.join(',') + '\n' + values.join(',') + '\n\nItem,Dimension,Reponse,Score ajusté,Pourcentage\n';
-      res.itemRows.forEach(r=>{ csv += [r.id, r.dim, r.raw, r.adj, r.pct.toFixed(2)+'%'].join(',') + '\n'; });
+      res.itemRows.forEach(r=>{ csv += [r.id, r.dim, r.raw, r.adj, r.pct.toFixed(2)].join(',') + '\n'; });
       const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
