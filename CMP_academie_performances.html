@@ -843,22 +843,43 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+
 <script>
 document.getElementById('exportPdf')?.addEventListener('click', async function(){
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF('p','mm','a4');
-  const target = document.querySelector('#app') || document.body;
+
+  // === cible : la carte "Résultats" UNIQUEMENT ===
+  function findResultsCard(){
+    // 1) chercher le h2 "Résultats"
+    const hs = Array.from(document.querySelectorAll('h2'));
+    let h = hs.find(x => (x.textContent||'').trim().toLowerCase() === 'résultats');
+    if (h && h.closest('.card')) return h.closest('.card');
+    // 2) fallback: table #scoreTable
+    const t = document.getElementById('scoreTable');
+    if (t && t.closest('.card')) return t.closest('.card');
+    // 3) dernier recours: tout le body
+    return document.body;
+  }
+
+  const target = findResultsCard();
+
+  // exclure tout ce qui est no-print
   const canvas = await html2canvas(target, {scale:2, useCORS:true, ignoreElements: el => el.classList && el.classList.contains('no-print')});
+
   const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
   const imgData = canvas.toDataURL('image/jpeg','1.0');
   const imgProps = doc.getImageProperties(imgData);
-  const pageH = doc.internal.pageSize.getHeight();
   const ratio = imgProps.height / imgProps.width;
   let imgH = pageW * ratio;
+
   if (imgH <= pageH) {
     doc.addImage(imgData,'JPEG',0,0,pageW,imgH);
   } else {
-    // paginate
+    // pagination
     const pxPerMm = canvas.width / pageW;
     const usableH = pageH;
     const sliceHpx = Math.ceil(usableH * pxPerMm);
@@ -878,7 +899,7 @@ document.getElementById('exportPdf')?.addEventListener('click', async function()
       y += h;
     }
   }
-  doc.save('CMP_rapport.pdf');
+  doc.save('CMP_resultats.pdf');
 });
 </script>
 
