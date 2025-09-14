@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>CMP – Compétences Mentales de Performances | HTML pur</title>
+<meta content="CMP – Questionnaire de compétences mentales (inspiré OMSAT-4), par Alexandre Griffet." name="description"/>
+<style>
+    :root{ --line:#e6e6e9; --muted:#596073; --ink:#0a0a0a; --bg:#ffffff; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.5; color: var(--ink); background: var(--bg); }
+    h1 { margin: 0 0 8px; }
+    h2 { margin: 0 0 12px; }
+    .muted { color: var(--muted); }
+    .card { border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 16px 0; background:#fff; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .item { padding: 12px; border: 1px solid var(--line); border-radius: 10px; }
+    .dim { font-weight: 600; margin-bottom: 4px; }
+    .scale { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .btn { padding: 10px 14px; border: 1px solid #222; border-radius: 10px; background: #fff; cursor: pointer; }
+    .btn.primary { background: #111; color: #fff; }
+    .footer { margin-top: 24px; font-size: 13px; color: #666; }
+    .flex { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    label.option { display: inline-flex; align-items: center; gap: 6px; }
+    .scores { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; font-size: 14px; }
+    th, td { border: 1px solid var(--line); padding: 8px; text-align: center; }
+    th { background: #fafafa; }
+    .consent { background: #f8f9fb; border: 1px solid #e4e7ee; padding: 12px; border-radius: 10px; }
+    .banner { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+    .banner img { width: 100%; height: auto; display: block; }
+    .section-title { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .mini-banner { width: 240px; max-width: 35%; }
+    @media (max-width:700px){ .mini-banner{ width: 180px; } }
+  </style>
+<style>/*CMP-hide*/ #detail-par-item,.detail-par-item,.detail-items, .section-detail-items{display:none!important} @media print{#detail-par-item,.detail-par-item,.detail-items,.section-detail-items{display:none!important}}</style></head>
+<body>
+<div class="banner" style="margin-bottom:16px">
+<img alt="Académie de Performances – Alexandre Griffet" src="assets/bandeau.jpg"/>
+</div>
+<h1>CMP – Compétences Mentales de Performances</h1>
+<div class="muted">Auto-évaluation des compétences mentales (inspiré OMSAT-4)</div>
+<div class="card" id="app">
+<div class="consent" id="consentBox"><strong>Confidentialité &amp; consentement</strong><br/>Vos réponses restent confidentielles. Les résultats servent à une démarche d’accompagnement en préparation mentale. Vous pouvez demander la suppression de vos données à tout moment.</div>
+<div class="flex" style="margin-top:8px">
+<div><label>Identifiant (optionnel) : <input id="pid" placeholder="Prénom ou code"/></label></div>
+<div><label>Contexte :
+        <select id="context">
+<option>Entraînement</option>
+<option>Compétition</option>
+<option>Scolaire</option>
+<option>Autre</option>
+</select></label>
+</div>
+<div><label>Date : <input id="pdate" type="date"/></label></div>
+<script>document.getElementById('pdate').valueAsDate = new Date();</script>
+</div>
+<div class="grid" id="items" style="margin-top:16px;">
+<div class="item">
+<div class="dim">Estime de soi</div>
+<div><strong>ES1</strong> — Je suis fier(ère) de ce que j’accomplis au quotidien.</div>
+<div aria-label="ES1" class="scale" role="radiogroup">
+<label class="option"><input name="ES1" type="radio" value="1"/> 1</label><label class="option"><input name="ES1" type="radio" value="2"/> 2</label><label class="option"><input name="ES1" type="radio" value="3"/> 3</label><label class="option"><input name="ES1" type="radio" value="4"/> 4</label><label class="option"><input name="ES1" type="radio" value="5"/> 5</label><label class="option"><input name="ES1" type="radio" value="6"/> 6</label><label class="option"><input name="ES1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Estime de soi</div>
+<div><strong>ES2</strong> — Je me sens souvent moins compétent(e) que les autres. <span class="muted">(inversé)</span></div>
+<div aria-label="ES2" class="scale" role="radiogroup">
+<label class="option"><input name="ES2" type="radio" value="1"/> 1</label><label class="option"><input name="ES2" type="radio" value="2"/> 2</label><label class="option"><input name="ES2" type="radio" value="3"/> 3</label><label class="option"><input name="ES2" type="radio" value="4"/> 4</label><label class="option"><input name="ES2" type="radio" value="5"/> 5</label><label class="option"><input name="ES2" type="radio" value="6"/> 6</label><label class="option"><input name="ES2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Estime de soi</div>
+<div><strong>ES3</strong> — Je reconnais mes qualités et mes progrès.</div>
+<div aria-label="ES3" class="scale" role="radiogroup">
+<label class="option"><input name="ES3" type="radio" value="1"/> 1</label><label class="option"><input name="ES3" type="radio" value="2"/> 2</label><label class="option"><input name="ES3" type="radio" value="3"/> 3</label><label class="option"><input name="ES3" type="radio" value="4"/> 4</label><label class="option"><input name="ES3" type="radio" value="5"/> 5</label><label class="option"><input name="ES3" type="radio" value="6"/> 6</label><label class="option"><input name="ES3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Estime de soi</div>
+<div><strong>ES4</strong> — J’ai tendance à minimiser mes réussites. <span class="muted">(inversé)</span></div>
+<div aria-label="ES4" class="scale" role="radiogroup">
+<label class="option"><input name="ES4" type="radio" value="1"/> 1</label><label class="option"><input name="ES4" type="radio" value="2"/> 2</label><label class="option"><input name="ES4" type="radio" value="3"/> 3</label><label class="option"><input name="ES4" type="radio" value="4"/> 4</label><label class="option"><input name="ES4" type="radio" value="5"/> 5</label><label class="option"><input name="ES4" type="radio" value="6"/> 6</label><label class="option"><input name="ES4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Estime de soi</div>
+<div><strong>ES5</strong> — Je mérite la réussite à laquelle j’aspire.</div>
+<div aria-label="ES5" class="scale" role="radiogroup">
+<label class="option"><input name="ES5" type="radio" value="1"/> 1</label><label class="option"><input name="ES5" type="radio" value="2"/> 2</label><label class="option"><input name="ES5" type="radio" value="3"/> 3</label><label class="option"><input name="ES5" type="radio" value="4"/> 4</label><label class="option"><input name="ES5" type="radio" value="5"/> 5</label><label class="option"><input name="ES5" type="radio" value="6"/> 6</label><label class="option"><input name="ES5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Estime de soi</div>
+<div><strong>ES6</strong> — Un échec remet facilement en cause ma valeur. <span class="muted">(inversé)</span></div>
+<div aria-label="ES6" class="scale" role="radiogroup">
+<label class="option"><input name="ES6" type="radio" value="1"/> 1</label><label class="option"><input name="ES6" type="radio" value="2"/> 2</label><label class="option"><input name="ES6" type="radio" value="3"/> 3</label><label class="option"><input name="ES6" type="radio" value="4"/> 4</label><label class="option"><input name="ES6" type="radio" value="5"/> 5</label><label class="option"><input name="ES6" type="radio" value="6"/> 6</label><label class="option"><input name="ES6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Énergie</div>
+<div><strong>EN1</strong> — Je dispose d’assez d’énergie pour tenir mes engagements.</div>
+<div aria-label="EN1" class="scale" role="radiogroup">
+<label class="option"><input name="EN1" type="radio" value="1"/> 1</label><label class="option"><input name="EN1" type="radio" value="2"/> 2</label><label class="option"><input name="EN1" type="radio" value="3"/> 3</label><label class="option"><input name="EN1" type="radio" value="4"/> 4</label><label class="option"><input name="EN1" type="radio" value="5"/> 5</label><label class="option"><input name="EN1" type="radio" value="6"/> 6</label><label class="option"><input name="EN1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Énergie</div>
+<div><strong>EN2</strong> — Je me sens souvent à court de vitalité. <span class="muted">(inversé)</span></div>
+<div aria-label="EN2" class="scale" role="radiogroup">
+<label class="option"><input name="EN2" type="radio" value="1"/> 1</label><label class="option"><input name="EN2" type="radio" value="2"/> 2</label><label class="option"><input name="EN2" type="radio" value="3"/> 3</label><label class="option"><input name="EN2" type="radio" value="4"/> 4</label><label class="option"><input name="EN2" type="radio" value="5"/> 5</label><label class="option"><input name="EN2" type="radio" value="6"/> 6</label><label class="option"><input name="EN2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Énergie</div>
+<div><strong>EN3</strong> — Je sais me dynamiser avant un moment important.</div>
+<div aria-label="EN3" class="scale" role="radiogroup">
+<label class="option"><input name="EN3" type="radio" value="1"/> 1</label><label class="option"><input name="EN3" type="radio" value="2"/> 2</label><label class="option"><input name="EN3" type="radio" value="3"/> 3</label><label class="option"><input name="EN3" type="radio" value="4"/> 4</label><label class="option"><input name="EN3" type="radio" value="5"/> 5</label><label class="option"><input name="EN3" type="radio" value="6"/> 6</label><label class="option"><input name="EN3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Énergie</div>
+<div><strong>EN4</strong> — Je peine à récupérer après un effort. <span class="muted">(inversé)</span></div>
+<div aria-label="EN4" class="scale" role="radiogroup">
+<label class="option"><input name="EN4" type="radio" value="1"/> 1</label><label class="option"><input name="EN4" type="radio" value="2"/> 2</label><label class="option"><input name="EN4" type="radio" value="3"/> 3</label><label class="option"><input name="EN4" type="radio" value="4"/> 4</label><label class="option"><input name="EN4" type="radio" value="5"/> 5</label><label class="option"><input name="EN4" type="radio" value="6"/> 6</label><label class="option"><input name="EN4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Énergie</div>
+<div><strong>EN5</strong> — Mon niveau d’énergie est stable sur la journée.</div>
+<div aria-label="EN5" class="scale" role="radiogroup">
+<label class="option"><input name="EN5" type="radio" value="1"/> 1</label><label class="option"><input name="EN5" type="radio" value="2"/> 2</label><label class="option"><input name="EN5" type="radio" value="3"/> 3</label><label class="option"><input name="EN5" type="radio" value="4"/> 4</label><label class="option"><input name="EN5" type="radio" value="5"/> 5</label><label class="option"><input name="EN5" type="radio" value="6"/> 6</label><label class="option"><input name="EN5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Énergie</div>
+<div><strong>EN6</strong> — La fatigue me fait abandonner trop vite. <span class="muted">(inversé)</span></div>
+<div aria-label="EN6" class="scale" role="radiogroup">
+<label class="option"><input name="EN6" type="radio" value="1"/> 1</label><label class="option"><input name="EN6" type="radio" value="2"/> 2</label><label class="option"><input name="EN6" type="radio" value="3"/> 3</label><label class="option"><input name="EN6" type="radio" value="4"/> 4</label><label class="option"><input name="EN6" type="radio" value="5"/> 5</label><label class="option"><input name="EN6" type="radio" value="6"/> 6</label><label class="option"><input name="EN6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Émotions</div>
+<div><strong>EM1</strong> — Je garde mon calme dans les moments difficiles.</div>
+<div aria-label="EM1" class="scale" role="radiogroup">
+<label class="option"><input name="EM1" type="radio" value="1"/> 1</label><label class="option"><input name="EM1" type="radio" value="2"/> 2</label><label class="option"><input name="EM1" type="radio" value="3"/> 3</label><label class="option"><input name="EM1" type="radio" value="4"/> 4</label><label class="option"><input name="EM1" type="radio" value="5"/> 5</label><label class="option"><input name="EM1" type="radio" value="6"/> 6</label><label class="option"><input name="EM1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Émotions</div>
+<div><strong>EM2</strong> — Mes émotions me submergent et nuisent à ma performance. <span class="muted">(inversé)</span></div>
+<div aria-label="EM2" class="scale" role="radiogroup">
+<label class="option"><input name="EM2" type="radio" value="1"/> 1</label><label class="option"><input name="EM2" type="radio" value="2"/> 2</label><label class="option"><input name="EM2" type="radio" value="3"/> 3</label><label class="option"><input name="EM2" type="radio" value="4"/> 4</label><label class="option"><input name="EM2" type="radio" value="5"/> 5</label><label class="option"><input name="EM2" type="radio" value="6"/> 6</label><label class="option"><input name="EM2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Émotions</div>
+<div><strong>EM3</strong> — J’identifie ce que je ressens et j’en fais un atout.</div>
+<div aria-label="EM3" class="scale" role="radiogroup">
+<label class="option"><input name="EM3" type="radio" value="1"/> 1</label><label class="option"><input name="EM3" type="radio" value="2"/> 2</label><label class="option"><input name="EM3" type="radio" value="3"/> 3</label><label class="option"><input name="EM3" type="radio" value="4"/> 4</label><label class="option"><input name="EM3" type="radio" value="5"/> 5</label><label class="option"><input name="EM3" type="radio" value="6"/> 6</label><label class="option"><input name="EM3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Émotions</div>
+<div><strong>EM4</strong> — Le stress me bloque lorsque l’enjeu est élevé. <span class="muted">(inversé)</span></div>
+<div aria-label="EM4" class="scale" role="radiogroup">
+<label class="option"><input name="EM4" type="radio" value="1"/> 1</label><label class="option"><input name="EM4" type="radio" value="2"/> 2</label><label class="option"><input name="EM4" type="radio" value="3"/> 3</label><label class="option"><input name="EM4" type="radio" value="4"/> 4</label><label class="option"><input name="EM4" type="radio" value="5"/> 5</label><label class="option"><input name="EM4" type="radio" value="6"/> 6</label><label class="option"><input name="EM4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Émotions</div>
+<div><strong>EM5</strong> — Je régule rapidement une émotion intense.</div>
+<div aria-label="EM5" class="scale" role="radiogroup">
+<label class="option"><input name="EM5" type="radio" value="1"/> 1</label><label class="option"><input name="EM5" type="radio" value="2"/> 2</label><label class="option"><input name="EM5" type="radio" value="3"/> 3</label><label class="option"><input name="EM5" type="radio" value="4"/> 4</label><label class="option"><input name="EM5" type="radio" value="5"/> 5</label><label class="option"><input name="EM5" type="radio" value="6"/> 6</label><label class="option"><input name="EM5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Émotions</div>
+<div><strong>EM6</strong> — La peur me fait éviter certaines situations utiles. <span class="muted">(inversé)</span></div>
+<div aria-label="EM6" class="scale" role="radiogroup">
+<label class="option"><input name="EM6" type="radio" value="1"/> 1</label><label class="option"><input name="EM6" type="radio" value="2"/> 2</label><label class="option"><input name="EM6" type="radio" value="3"/> 3</label><label class="option"><input name="EM6" type="radio" value="4"/> 4</label><label class="option"><input name="EM6" type="radio" value="5"/> 5</label><label class="option"><input name="EM6" type="radio" value="6"/> 6</label><label class="option"><input name="EM6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Confiance en soi</div>
+<div><strong>CS1</strong> — Je crois en mes capacités même sous pression.</div>
+<div aria-label="CS1" class="scale" role="radiogroup">
+<label class="option"><input name="CS1" type="radio" value="1"/> 1</label><label class="option"><input name="CS1" type="radio" value="2"/> 2</label><label class="option"><input name="CS1" type="radio" value="3"/> 3</label><label class="option"><input name="CS1" type="radio" value="4"/> 4</label><label class="option"><input name="CS1" type="radio" value="5"/> 5</label><label class="option"><input name="CS1" type="radio" value="6"/> 6</label><label class="option"><input name="CS1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Confiance en soi</div>
+<div><strong>CS2</strong> — Je doute facilement de moi face aux obstacles. <span class="muted">(inversé)</span></div>
+<div aria-label="CS2" class="scale" role="radiogroup">
+<label class="option"><input name="CS2" type="radio" value="1"/> 1</label><label class="option"><input name="CS2" type="radio" value="2"/> 2</label><label class="option"><input name="CS2" type="radio" value="3"/> 3</label><label class="option"><input name="CS2" type="radio" value="4"/> 4</label><label class="option"><input name="CS2" type="radio" value="5"/> 5</label><label class="option"><input name="CS2" type="radio" value="6"/> 6</label><label class="option"><input name="CS2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Confiance en soi</div>
+<div><strong>CS3</strong> — Je me sens capable d’apprendre ce qui me manque.</div>
+<div aria-label="CS3" class="scale" role="radiogroup">
+<label class="option"><input name="CS3" type="radio" value="1"/> 1</label><label class="option"><input name="CS3" type="radio" value="2"/> 2</label><label class="option"><input name="CS3" type="radio" value="3"/> 3</label><label class="option"><input name="CS3" type="radio" value="4"/> 4</label><label class="option"><input name="CS3" type="radio" value="5"/> 5</label><label class="option"><input name="CS3" type="radio" value="6"/> 6</label><label class="option"><input name="CS3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Confiance en soi</div>
+<div><strong>CS4</strong> — Une erreur suffit à entamer fortement ma confiance. <span class="muted">(inversé)</span></div>
+<div aria-label="CS4" class="scale" role="radiogroup">
+<label class="option"><input name="CS4" type="radio" value="1"/> 1</label><label class="option"><input name="CS4" type="radio" value="2"/> 2</label><label class="option"><input name="CS4" type="radio" value="3"/> 3</label><label class="option"><input name="CS4" type="radio" value="4"/> 4</label><label class="option"><input name="CS4" type="radio" value="5"/> 5</label><label class="option"><input name="CS4" type="radio" value="6"/> 6</label><label class="option"><input name="CS4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Confiance en soi</div>
+<div><strong>CS5</strong> — Je prends des initiatives même si tout n’est pas parfait.</div>
+<div aria-label="CS5" class="scale" role="radiogroup">
+<label class="option"><input name="CS5" type="radio" value="1"/> 1</label><label class="option"><input name="CS5" type="radio" value="2"/> 2</label><label class="option"><input name="CS5" type="radio" value="3"/> 3</label><label class="option"><input name="CS5" type="radio" value="4"/> 4</label><label class="option"><input name="CS5" type="radio" value="5"/> 5</label><label class="option"><input name="CS5" type="radio" value="6"/> 6</label><label class="option"><input name="CS5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Confiance en soi</div>
+<div><strong>CS6</strong> — Je préfère ne pas essayer si le risque d’échec existe. <span class="muted">(inversé)</span></div>
+<div aria-label="CS6" class="scale" role="radiogroup">
+<label class="option"><input name="CS6" type="radio" value="1"/> 1</label><label class="option"><input name="CS6" type="radio" value="2"/> 2</label><label class="option"><input name="CS6" type="radio" value="3"/> 3</label><label class="option"><input name="CS6" type="radio" value="4"/> 4</label><label class="option"><input name="CS6" type="radio" value="5"/> 5</label><label class="option"><input name="CS6" type="radio" value="6"/> 6</label><label class="option"><input name="CS6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Motivation</div>
+<div><strong>MO1</strong> — Je connais clairement mes raisons d’agir.</div>
+<div aria-label="MO1" class="scale" role="radiogroup">
+<label class="option"><input name="MO1" type="radio" value="1"/> 1</label><label class="option"><input name="MO1" type="radio" value="2"/> 2</label><label class="option"><input name="MO1" type="radio" value="3"/> 3</label><label class="option"><input name="MO1" type="radio" value="4"/> 4</label><label class="option"><input name="MO1" type="radio" value="5"/> 5</label><label class="option"><input name="MO1" type="radio" value="6"/> 6</label><label class="option"><input name="MO1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Motivation</div>
+<div><strong>MO2</strong> — Mon envie fluctue au point de freiner mes actions. <span class="muted">(inversé)</span></div>
+<div aria-label="MO2" class="scale" role="radiogroup">
+<label class="option"><input name="MO2" type="radio" value="1"/> 1</label><label class="option"><input name="MO2" type="radio" value="2"/> 2</label><label class="option"><input name="MO2" type="radio" value="3"/> 3</label><label class="option"><input name="MO2" type="radio" value="4"/> 4</label><label class="option"><input name="MO2" type="radio" value="5"/> 5</label><label class="option"><input name="MO2" type="radio" value="6"/> 6</label><label class="option"><input name="MO2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Motivation</div>
+<div><strong>MO3</strong> — Je persévère même quand l’effort devient inconfortable.</div>
+<div aria-label="MO3" class="scale" role="radiogroup">
+<label class="option"><input name="MO3" type="radio" value="1"/> 1</label><label class="option"><input name="MO3" type="radio" value="2"/> 2</label><label class="option"><input name="MO3" type="radio" value="3"/> 3</label><label class="option"><input name="MO3" type="radio" value="4"/> 4</label><label class="option"><input name="MO3" type="radio" value="5"/> 5</label><label class="option"><input name="MO3" type="radio" value="6"/> 6</label><label class="option"><input name="MO3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Motivation</div>
+<div><strong>MO4</strong> — Je repousse souvent ce qui est important pour moi. <span class="muted">(inversé)</span></div>
+<div aria-label="MO4" class="scale" role="radiogroup">
+<label class="option"><input name="MO4" type="radio" value="1"/> 1</label><label class="option"><input name="MO4" type="radio" value="2"/> 2</label><label class="option"><input name="MO4" type="radio" value="3"/> 3</label><label class="option"><input name="MO4" type="radio" value="4"/> 4</label><label class="option"><input name="MO4" type="radio" value="5"/> 5</label><label class="option"><input name="MO4" type="radio" value="6"/> 6</label><label class="option"><input name="MO4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Motivation</div>
+<div><strong>MO5</strong> — Je transforme mes objectifs en étapes motivantes.</div>
+<div aria-label="MO5" class="scale" role="radiogroup">
+<label class="option"><input name="MO5" type="radio" value="1"/> 1</label><label class="option"><input name="MO5" type="radio" value="2"/> 2</label><label class="option"><input name="MO5" type="radio" value="3"/> 3</label><label class="option"><input name="MO5" type="radio" value="4"/> 4</label><label class="option"><input name="MO5" type="radio" value="5"/> 5</label><label class="option"><input name="MO5" type="radio" value="6"/> 6</label><label class="option"><input name="MO5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Motivation</div>
+<div><strong>MO6</strong> — Quand la gratification est lointaine, je relâche mes efforts. <span class="muted">(inversé)</span></div>
+<div aria-label="MO6" class="scale" role="radiogroup">
+<label class="option"><input name="MO6" type="radio" value="1"/> 1</label><label class="option"><input name="MO6" type="radio" value="2"/> 2</label><label class="option"><input name="MO6" type="radio" value="3"/> 3</label><label class="option"><input name="MO6" type="radio" value="4"/> 4</label><label class="option"><input name="MO6" type="radio" value="5"/> 5</label><label class="option"><input name="MO6" type="radio" value="6"/> 6</label><label class="option"><input name="MO6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Concentration</div>
+<div><strong>CO1</strong> — Je reste focalisé(e) malgré les distractions.</div>
+<div aria-label="CO1" class="scale" role="radiogroup">
+<label class="option"><input name="CO1" type="radio" value="1"/> 1</label><label class="option"><input name="CO1" type="radio" value="2"/> 2</label><label class="option"><input name="CO1" type="radio" value="3"/> 3</label><label class="option"><input name="CO1" type="radio" value="4"/> 4</label><label class="option"><input name="CO1" type="radio" value="5"/> 5</label><label class="option"><input name="CO1" type="radio" value="6"/> 6</label><label class="option"><input name="CO1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Concentration</div>
+<div><strong>CO2</strong> — Je perds facilement le fil lors d’une tâche. <span class="muted">(inversé)</span></div>
+<div aria-label="CO2" class="scale" role="radiogroup">
+<label class="option"><input name="CO2" type="radio" value="1"/> 1</label><label class="option"><input name="CO2" type="radio" value="2"/> 2</label><label class="option"><input name="CO2" type="radio" value="3"/> 3</label><label class="option"><input name="CO2" type="radio" value="4"/> 4</label><label class="option"><input name="CO2" type="radio" value="5"/> 5</label><label class="option"><input name="CO2" type="radio" value="6"/> 6</label><label class="option"><input name="CO2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Concentration</div>
+<div><strong>CO3</strong> — Je sais ramener mon attention quand elle dérive.</div>
+<div aria-label="CO3" class="scale" role="radiogroup">
+<label class="option"><input name="CO3" type="radio" value="1"/> 1</label><label class="option"><input name="CO3" type="radio" value="2"/> 2</label><label class="option"><input name="CO3" type="radio" value="3"/> 3</label><label class="option"><input name="CO3" type="radio" value="4"/> 4</label><label class="option"><input name="CO3" type="radio" value="5"/> 5</label><label class="option"><input name="CO3" type="radio" value="6"/> 6</label><label class="option"><input name="CO3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Concentration</div>
+<div><strong>CO4</strong> — Les notifications ou pensées parasites me coupent souvent. <span class="muted">(inversé)</span></div>
+<div aria-label="CO4" class="scale" role="radiogroup">
+<label class="option"><input name="CO4" type="radio" value="1"/> 1</label><label class="option"><input name="CO4" type="radio" value="2"/> 2</label><label class="option"><input name="CO4" type="radio" value="3"/> 3</label><label class="option"><input name="CO4" type="radio" value="4"/> 4</label><label class="option"><input name="CO4" type="radio" value="5"/> 5</label><label class="option"><input name="CO4" type="radio" value="6"/> 6</label><label class="option"><input name="CO4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Concentration</div>
+<div><strong>CO5</strong> — Je planifie des plages sans interruption.</div>
+<div aria-label="CO5" class="scale" role="radiogroup">
+<label class="option"><input name="CO5" type="radio" value="1"/> 1</label><label class="option"><input name="CO5" type="radio" value="2"/> 2</label><label class="option"><input name="CO5" type="radio" value="3"/> 3</label><label class="option"><input name="CO5" type="radio" value="4"/> 4</label><label class="option"><input name="CO5" type="radio" value="5"/> 5</label><label class="option"><input name="CO5" type="radio" value="6"/> 6</label><label class="option"><input name="CO5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Concentration</div>
+<div><strong>CO6</strong> — Je me disperse quand la tâche devient monotone. <span class="muted">(inversé)</span></div>
+<div aria-label="CO6" class="scale" role="radiogroup">
+<label class="option"><input name="CO6" type="radio" value="1"/> 1</label><label class="option"><input name="CO6" type="radio" value="2"/> 2</label><label class="option"><input name="CO6" type="radio" value="3"/> 3</label><label class="option"><input name="CO6" type="radio" value="4"/> 4</label><label class="option"><input name="CO6" type="radio" value="5"/> 5</label><label class="option"><input name="CO6" type="radio" value="6"/> 6</label><label class="option"><input name="CO6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Communication</div>
+<div><strong>CM1</strong> — J’exprime clairement mes idées à l’oral.</div>
+<div aria-label="CM1" class="scale" role="radiogroup">
+<label class="option"><input name="CM1" type="radio" value="1"/> 1</label><label class="option"><input name="CM1" type="radio" value="2"/> 2</label><label class="option"><input name="CM1" type="radio" value="3"/> 3</label><label class="option"><input name="CM1" type="radio" value="4"/> 4</label><label class="option"><input name="CM1" type="radio" value="5"/> 5</label><label class="option"><input name="CM1" type="radio" value="6"/> 6</label><label class="option"><input name="CM1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Communication</div>
+<div><strong>CM2</strong> — Mon langage corporel contredit parfois mon message. <span class="muted">(inversé)</span></div>
+<div aria-label="CM2" class="scale" role="radiogroup">
+<label class="option"><input name="CM2" type="radio" value="1"/> 1</label><label class="option"><input name="CM2" type="radio" value="2"/> 2</label><label class="option"><input name="CM2" type="radio" value="3"/> 3</label><label class="option"><input name="CM2" type="radio" value="4"/> 4</label><label class="option"><input name="CM2" type="radio" value="5"/> 5</label><label class="option"><input name="CM2" type="radio" value="6"/> 6</label><label class="option"><input name="CM2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Communication</div>
+<div><strong>CM3</strong> — J’adapte le ton et le rythme de ma voix à la situation.</div>
+<div aria-label="CM3" class="scale" role="radiogroup">
+<label class="option"><input name="CM3" type="radio" value="1"/> 1</label><label class="option"><input name="CM3" type="radio" value="2"/> 2</label><label class="option"><input name="CM3" type="radio" value="3"/> 3</label><label class="option"><input name="CM3" type="radio" value="4"/> 4</label><label class="option"><input name="CM3" type="radio" value="5"/> 5</label><label class="option"><input name="CM3" type="radio" value="6"/> 6</label><label class="option"><input name="CM3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Communication</div>
+<div><strong>CM4</strong> — J’évite les échanges importants par crainte d’incompréhension. <span class="muted">(inversé)</span></div>
+<div aria-label="CM4" class="scale" role="radiogroup">
+<label class="option"><input name="CM4" type="radio" value="1"/> 1</label><label class="option"><input name="CM4" type="radio" value="2"/> 2</label><label class="option"><input name="CM4" type="radio" value="3"/> 3</label><label class="option"><input name="CM4" type="radio" value="4"/> 4</label><label class="option"><input name="CM4" type="radio" value="5"/> 5</label><label class="option"><input name="CM4" type="radio" value="6"/> 6</label><label class="option"><input name="CM4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Communication</div>
+<div><strong>CM5</strong> — Je fais preuve d’écoute active et je reformule.</div>
+<div aria-label="CM5" class="scale" role="radiogroup">
+<label class="option"><input name="CM5" type="radio" value="1"/> 1</label><label class="option"><input name="CM5" type="radio" value="2"/> 2</label><label class="option"><input name="CM5" type="radio" value="3"/> 3</label><label class="option"><input name="CM5" type="radio" value="4"/> 4</label><label class="option"><input name="CM5" type="radio" value="5"/> 5</label><label class="option"><input name="CM5" type="radio" value="6"/> 6</label><label class="option"><input name="CM5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Communication</div>
+<div><strong>CM6</strong> — En situation stressante, mon message devient confus. <span class="muted">(inversé)</span></div>
+<div aria-label="CM6" class="scale" role="radiogroup">
+<label class="option"><input name="CM6" type="radio" value="1"/> 1</label><label class="option"><input name="CM6" type="radio" value="2"/> 2</label><label class="option"><input name="CM6" type="radio" value="3"/> 3</label><label class="option"><input name="CM6" type="radio" value="4"/> 4</label><label class="option"><input name="CM6" type="radio" value="5"/> 5</label><label class="option"><input name="CM6" type="radio" value="6"/> 6</label><label class="option"><input name="CM6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Objectifs &amp; persévérance</div>
+<div><strong>OP1</strong> — Je me fixe des objectifs précis et mesurables.</div>
+<div aria-label="OP1" class="scale" role="radiogroup">
+<label class="option"><input name="OP1" type="radio" value="1"/> 1</label><label class="option"><input name="OP1" type="radio" value="2"/> 2</label><label class="option"><input name="OP1" type="radio" value="3"/> 3</label><label class="option"><input name="OP1" type="radio" value="4"/> 4</label><label class="option"><input name="OP1" type="radio" value="5"/> 5</label><label class="option"><input name="OP1" type="radio" value="6"/> 6</label><label class="option"><input name="OP1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Objectifs &amp; persévérance</div>
+<div><strong>OP2</strong> — J’abandonne si les résultats tardent à venir. <span class="muted">(inversé)</span></div>
+<div aria-label="OP2" class="scale" role="radiogroup">
+<label class="option"><input name="OP2" type="radio" value="1"/> 1</label><label class="option"><input name="OP2" type="radio" value="2"/> 2</label><label class="option"><input name="OP2" type="radio" value="3"/> 3</label><label class="option"><input name="OP2" type="radio" value="4"/> 4</label><label class="option"><input name="OP2" type="radio" value="5"/> 5</label><label class="option"><input name="OP2" type="radio" value="6"/> 6</label><label class="option"><input name="OP2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Objectifs &amp; persévérance</div>
+<div><strong>OP3</strong> — Je découpe mes buts en étapes atteignables.</div>
+<div aria-label="OP3" class="scale" role="radiogroup">
+<label class="option"><input name="OP3" type="radio" value="1"/> 1</label><label class="option"><input name="OP3" type="radio" value="2"/> 2</label><label class="option"><input name="OP3" type="radio" value="3"/> 3</label><label class="option"><input name="OP3" type="radio" value="4"/> 4</label><label class="option"><input name="OP3" type="radio" value="5"/> 5</label><label class="option"><input name="OP3" type="radio" value="6"/> 6</label><label class="option"><input name="OP3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Objectifs &amp; persévérance</div>
+<div><strong>OP4</strong> — Je change souvent d’objectif sans raison solide. <span class="muted">(inversé)</span></div>
+<div aria-label="OP4" class="scale" role="radiogroup">
+<label class="option"><input name="OP4" type="radio" value="1"/> 1</label><label class="option"><input name="OP4" type="radio" value="2"/> 2</label><label class="option"><input name="OP4" type="radio" value="3"/> 3</label><label class="option"><input name="OP4" type="radio" value="4"/> 4</label><label class="option"><input name="OP4" type="radio" value="5"/> 5</label><label class="option"><input name="OP4" type="radio" value="6"/> 6</label><label class="option"><input name="OP4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Objectifs &amp; persévérance</div>
+<div><strong>OP5</strong> — Je suis persévérant(e) face aux imprévus.</div>
+<div aria-label="OP5" class="scale" role="radiogroup">
+<label class="option"><input name="OP5" type="radio" value="1"/> 1</label><label class="option"><input name="OP5" type="radio" value="2"/> 2</label><label class="option"><input name="OP5" type="radio" value="3"/> 3</label><label class="option"><input name="OP5" type="radio" value="4"/> 4</label><label class="option"><input name="OP5" type="radio" value="5"/> 5</label><label class="option"><input name="OP5" type="radio" value="6"/> 6</label><label class="option"><input name="OP5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Objectifs &amp; persévérance</div>
+<div><strong>OP6</strong> — Je baisse les bras quand c’est plus dur que prévu. <span class="muted">(inversé)</span></div>
+<div aria-label="OP6" class="scale" role="radiogroup">
+<label class="option"><input name="OP6" type="radio" value="1"/> 1</label><label class="option"><input name="OP6" type="radio" value="2"/> 2</label><label class="option"><input name="OP6" type="radio" value="3"/> 3</label><label class="option"><input name="OP6" type="radio" value="4"/> 4</label><label class="option"><input name="OP6" type="radio" value="5"/> 5</label><label class="option"><input name="OP6" type="radio" value="6"/> 6</label><label class="option"><input name="OP6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Organisation</div>
+<div><strong>OR1</strong> — Je planifie et priorise mes tâches efficacement.</div>
+<div aria-label="OR1" class="scale" role="radiogroup">
+<label class="option"><input name="OR1" type="radio" value="1"/> 1</label><label class="option"><input name="OR1" type="radio" value="2"/> 2</label><label class="option"><input name="OR1" type="radio" value="3"/> 3</label><label class="option"><input name="OR1" type="radio" value="4"/> 4</label><label class="option"><input name="OR1" type="radio" value="5"/> 5</label><label class="option"><input name="OR1" type="radio" value="6"/> 6</label><label class="option"><input name="OR1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Organisation</div>
+<div><strong>OR2</strong> — Je m’éparpille facilement et perds le fil. <span class="muted">(inversé)</span></div>
+<div aria-label="OR2" class="scale" role="radiogroup">
+<label class="option"><input name="OR2" type="radio" value="1"/> 1</label><label class="option"><input name="OR2" type="radio" value="2"/> 2</label><label class="option"><input name="OR2" type="radio" value="3"/> 3</label><label class="option"><input name="OR2" type="radio" value="4"/> 4</label><label class="option"><input name="OR2" type="radio" value="5"/> 5</label><label class="option"><input name="OR2" type="radio" value="6"/> 6</label><label class="option"><input name="OR2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Organisation</div>
+<div><strong>OR3</strong> — J’utilise des outils (agenda, checklists, trackers).</div>
+<div aria-label="OR3" class="scale" role="radiogroup">
+<label class="option"><input name="OR3" type="radio" value="1"/> 1</label><label class="option"><input name="OR3" type="radio" value="2"/> 2</label><label class="option"><input name="OR3" type="radio" value="3"/> 3</label><label class="option"><input name="OR3" type="radio" value="4"/> 4</label><label class="option"><input name="OR3" type="radio" value="5"/> 5</label><label class="option"><input name="OR3" type="radio" value="6"/> 6</label><label class="option"><input name="OR3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Organisation</div>
+<div><strong>OR4</strong> — Je commence sans clarifier quoi faire exactement. <span class="muted">(inversé)</span></div>
+<div aria-label="OR4" class="scale" role="radiogroup">
+<label class="option"><input name="OR4" type="radio" value="1"/> 1</label><label class="option"><input name="OR4" type="radio" value="2"/> 2</label><label class="option"><input name="OR4" type="radio" value="3"/> 3</label><label class="option"><input name="OR4" type="radio" value="4"/> 4</label><label class="option"><input name="OR4" type="radio" value="5"/> 5</label><label class="option"><input name="OR4" type="radio" value="6"/> 6</label><label class="option"><input name="OR4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Organisation</div>
+<div><strong>OR5</strong> — Je prévois des temps de revue pour m’ajuster.</div>
+<div aria-label="OR5" class="scale" role="radiogroup">
+<label class="option"><input name="OR5" type="radio" value="1"/> 1</label><label class="option"><input name="OR5" type="radio" value="2"/> 2</label><label class="option"><input name="OR5" type="radio" value="3"/> 3</label><label class="option"><input name="OR5" type="radio" value="4"/> 4</label><label class="option"><input name="OR5" type="radio" value="5"/> 5</label><label class="option"><input name="OR5" type="radio" value="6"/> 6</label><label class="option"><input name="OR5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Organisation</div>
+<div><strong>OR6</strong> — Je manque de structure quand la charge augmente. <span class="muted">(inversé)</span></div>
+<div aria-label="OR6" class="scale" role="radiogroup">
+<label class="option"><input name="OR6" type="radio" value="1"/> 1</label><label class="option"><input name="OR6" type="radio" value="2"/> 2</label><label class="option"><input name="OR6" type="radio" value="3"/> 3</label><label class="option"><input name="OR6" type="radio" value="4"/> 4</label><label class="option"><input name="OR6" type="radio" value="5"/> 5</label><label class="option"><input name="OR6" type="radio" value="6"/> 6</label><label class="option"><input name="OR6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Résilience</div>
+<div><strong>RE1</strong> — Je rebondis rapidement après un échec.</div>
+<div aria-label="RE1" class="scale" role="radiogroup">
+<label class="option"><input name="RE1" type="radio" value="1"/> 1</label><label class="option"><input name="RE1" type="radio" value="2"/> 2</label><label class="option"><input name="RE1" type="radio" value="3"/> 3</label><label class="option"><input name="RE1" type="radio" value="4"/> 4</label><label class="option"><input name="RE1" type="radio" value="5"/> 5</label><label class="option"><input name="RE1" type="radio" value="6"/> 6</label><label class="option"><input name="RE1" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Résilience</div>
+<div><strong>RE2</strong> — Une difficulté me décourage pour longtemps. <span class="muted">(inversé)</span></div>
+<div aria-label="RE2" class="scale" role="radiogroup">
+<label class="option"><input name="RE2" type="radio" value="1"/> 1</label><label class="option"><input name="RE2" type="radio" value="2"/> 2</label><label class="option"><input name="RE2" type="radio" value="3"/> 3</label><label class="option"><input name="RE2" type="radio" value="4"/> 4</label><label class="option"><input name="RE2" type="radio" value="5"/> 5</label><label class="option"><input name="RE2" type="radio" value="6"/> 6</label><label class="option"><input name="RE2" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Résilience</div>
+<div><strong>RE3</strong> — Je transforme les obstacles en apprentissages.</div>
+<div aria-label="RE3" class="scale" role="radiogroup">
+<label class="option"><input name="RE3" type="radio" value="1"/> 1</label><label class="option"><input name="RE3" type="radio" value="2"/> 2</label><label class="option"><input name="RE3" type="radio" value="3"/> 3</label><label class="option"><input name="RE3" type="radio" value="4"/> 4</label><label class="option"><input name="RE3" type="radio" value="5"/> 5</label><label class="option"><input name="RE3" type="radio" value="6"/> 6</label><label class="option"><input name="RE3" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Résilience</div>
+<div><strong>RE4</strong> — Face à l’adversité, j’ai du mal à repartir. <span class="muted">(inversé)</span></div>
+<div aria-label="RE4" class="scale" role="radiogroup">
+<label class="option"><input name="RE4" type="radio" value="1"/> 1</label><label class="option"><input name="RE4" type="radio" value="2"/> 2</label><label class="option"><input name="RE4" type="radio" value="3"/> 3</label><label class="option"><input name="RE4" type="radio" value="4"/> 4</label><label class="option"><input name="RE4" type="radio" value="5"/> 5</label><label class="option"><input name="RE4" type="radio" value="6"/> 6</label><label class="option"><input name="RE4" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Résilience</div>
+<div><strong>RE5</strong> — Je demande de l’aide ou ajuste ma stratégie quand il le faut.</div>
+<div aria-label="RE5" class="scale" role="radiogroup">
+<label class="option"><input name="RE5" type="radio" value="1"/> 1</label><label class="option"><input name="RE5" type="radio" value="2"/> 2</label><label class="option"><input name="RE5" type="radio" value="3"/> 3</label><label class="option"><input name="RE5" type="radio" value="4"/> 4</label><label class="option"><input name="RE5" type="radio" value="5"/> 5</label><label class="option"><input name="RE5" type="radio" value="6"/> 6</label><label class="option"><input name="RE5" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+<div class="item">
+<div class="dim">Résilience</div>
+<div><strong>RE6</strong> — Les critiques me paralysent au lieu de m’aider. <span class="muted">(inversé)</span></div>
+<div aria-label="RE6" class="scale" role="radiogroup">
+<label class="option"><input name="RE6" type="radio" value="1"/> 1</label><label class="option"><input name="RE6" type="radio" value="2"/> 2</label><label class="option"><input name="RE6" type="radio" value="3"/> 3</label><label class="option"><input name="RE6" type="radio" value="4"/> 4</label><label class="option"><input name="RE6" type="radio" value="5"/> 5</label><label class="option"><input name="RE6" type="radio" value="6"/> 6</label><label class="option"><input name="RE6" type="radio" value="7"/> 7</label>
+<span class="muted">(Pas du tout d’accord → Tout à fait d’accord)</span>
+</div>
+</div>
+</div>
+<div class="actions">
+<button class="btn primary" id="compute">Calculer les scores</button>
+<button class="btn" id="reset">Réinitialiser</button>
+
+
+</div>
+</div>
+<div class="card">
+<div class="section-title">
+<h2>Résultats</h2>
+<div class="mini-banner">
+<img alt="Académie de Performances – Résultats" src="assets/bandeau.jpg"/>
+</div>
+</div>
+<div class="scores" style="margin-top:8px">
+<table id="scoreTable">
+<thead><tr id="scoreHead"><th>Participant</th><th>Estime de soi (%)</th><th>Énergie (%)</th><th>Émotions (%)</th><th>Confiance en soi (%)</th><th>Motivation (%)</th><th>Concentration (%)</th><th>Communication (%)</th><th>Objectifs &amp; persévérance (%)</th><th>Organisation (%)</th><th>Résilience (%)</th><th>Moyenne (%)</th></tr></thead>
+<tbody><tr id="scoreRow"><td id="pidCell">—</td><td id="d0">—</td><td id="d1">—</td><td id="d2">—</td><td id="d3">—</td><td id="d4">—</td><td id="d5">—</td><td id="d6">—</td><td id="d7">—</td><td id="d8">—</td><td id="d9">—</td><td id="avg">—</td></tr></tbody>
+</table></div>
+</div>
+<canvas height="420" id="radar" style="margin-top:16px;" width="600"></canvas>
+<div class="scores" style="margin-top:16px">
+<h3 style="margin:0 0 8px">Détail par item</h2><div id="detail-par-item" class="no-print" style="display:none!important"> (% après inversion si nécessaire)</h3>
+<table id="itemsTable">
+<thead><tr id="itemsHead"><th>Item</th><th>Dimension</th><th>Réponse (1–7)</th><th>Score ajusté</th><th>%</th></tr></thead>
+<tbody id="itemsBody"></tbody>
+</table>
+</div>
+<div class="footer">Échelle 1–7 ; inversion si <em>(inversé)</em> : <code>score' = 8 − score</code>. Les pourcentages sont normalisés sur 7 points (x/7×100).</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    (function(){
+      var dims = ["Estime de soi","Énergie","Émotions","Confiance en soi","Motivation","Concentration","Communication","Objectifs & persévérance","Organisation","Résilience"];
+      var reverse = {"ES2":1,"ES4":1,"ES6":1,"EN2":1,"EN4":1,"EN6":1,"EM2":1,"EM4":1,"EM6":1,"CS2":1,"CS4":1,"CS6":1,"MO2":1,"MO4":1,"MO6":1,"CO2":1,"CO4":1,"CO6":1,"CM2":1,"CM4":1,"CM6":1,"OP2":1,"OP4":1,"OP6":1,"OR2":1,"OR4":1,"OR6":1,"RE2":1,"RE4":1,"RE6":1};
+      var mapDim = {
+        "ES":"Estime de soi","EN":"Énergie","EM":"Émotions","CS":"Confiance en soi","MO":"Motivation",
+        "CO":"Concentration","CM":"Communication","OP":"Objectifs & persévérance","OR":"Organisation","RE":"Résilience"
+      };
+
+      function getVal(name){
+        var els = document.getElementsByName(name);
+        for (var i=0;i<els.length;i++) if (els[i].checked) return parseInt(els[i].value,10);
+        return null;
+      }
+
+      function computeScores(){
+        var perDim = {}; dims.forEach(function(d){ perDim[d] = []; });
+        var itemRows = [];
+        var missing = [];
+        var max = 7;
+
+        var seen = {};
+        var inputs = document.querySelectorAll('input[type="radio"]');
+        for (var i=0;i<inputs.length;i++){
+          var nm = inputs[i].name;
+          if (seen[nm]) continue;
+          seen[nm] = true;
+          var v = getVal(nm);
+          if (v==null) { missing.push(nm); continue; }
+          var adj = reverse[nm] ? ((max+1) - v) : v; // 8 - v
+          var dimKey = mapDim[nm.substring(0,2)];
+          perDim[dimKey].push(adj);
+          var pct = Math.round((adj/7)*10000)/100;
+          itemRows.push({ id:nm, dim:dimKey, raw:v, adj:adj, pct:pct });
+        }
+
+        if (missing.length) { alert("Réponses manquantes : " + missing.join(", ")); return null; }
+
+        var meansPct = dims.map(function(d){
+          var arr = perDim[d], s=0; for (var i=0;i<arr.length;i++) s+=arr[i];
+          var m = s/arr.length;
+          return Math.round((m/7)*10000)/100;
+        });
+        var s2=0; for (var j=0;j<meansPct.length;j++) s2+=meansPct[j];
+        var globalPct = Math.round((s2/meansPct.length)*100)/100;
+
+        return { meansPct:meansPct, globalPct:globalPct, itemRows:itemRows };
+      }
+
+      function updateUI(res){
+        if (!res) return;
+        document.getElementById('pidCell').textContent = document.getElementById('pid').value || '—';
+        for (var i=0;i<res.meansPct.length;i++) document.getElementById('d'+i).textContent = res.meansPct[i].toFixed(2);
+        document.getElementById('avg').textContent = res.globalPct.toFixed(2);
+        drawStar(res.meansPct);
+        renderItemsTable(res.itemRows);
+      }
+
+      function drawStar(valuesPct){
+        var ctx = document.getElementById('radar');
+        if (window.__chart) window.__chart.destroy();
+        if (window.Chart) {
+          window.__chart = new Chart(ctx, {
+            type: 'radar',
+            data: { labels: dims, datasets: [{ label:'Profil (%)', data: valuesPct, fill: true }] },
+            options: { responsive: true, scales: { r: { suggestedMin: 0, suggestedMax: 100, ticks: { stepSize: 20 } } }, plugins: { legend: { display:false } } }
+          });
+        }
+      }
+
+      function renderItemsTable(rows){
+        var body = document.getElementById('itemsBody');
+        body.innerHTML = '';
+        for (var i=0;i<rows.length;i++){
+          var r = rows[i];
+          var tr = document.createElement('tr');
+          function td(txt){ var t = document.createElement('td'); t.textContent = txt; return t; }
+          tr.appendChild(td(r.id));
+          tr.appendChild(td(r.dim));
+          tr.appendChild(td(r.raw));
+          tr.appendChild(td(r.adj));
+          tr.appendChild(td(r.pct.toFixed(2)));
+          body.appendChild(tr);
+        }
+      }
+
+      function resetForm(){
+        var inputs = document.querySelectorAll('input[type="radio"]');
+        for (var i=0;i<inputs.length;i++) inputs[i].checked = false;
+        for (var k=0;k<10;k++) document.getElementById('d'+k).textContent = '—';
+        document.getElementById('avg').textContent = '—';
+        document.getElementById('itemsBody').innerHTML = '';
+        if (window.__chart) { window.__chart.destroy(); window.__chart=null; }
+      }
+
+      function exportCSV(){
+        var pid = document.getElementById('pid').value || '';
+        var date = document.getElementById('pdate').value || '';
+        var ctx = document.getElementById('context').value || '';
+        var res = computeScores(); if (!res) return;
+        var headers = ['participant','date','contexte'].concat(dims.map(function(d){return d+' (%)';})).concat(['moyenne (%)']);
+        var values  = [pid, date, ctx].concat(res.meansPct.map(function(v){return v.toFixed(2);})).concat([res.globalPct.toFixed(2)]);
+        var csv = headers.join(',') + '\n' + values.join(',') + '\n\nItem,Dimension,Reponse,Score ajusté,Pourcentage\n';
+        for (var i=0;i<res.itemRows.length;i++){
+          var r = res.itemRows[i];
+          csv += [r.id, r.dim, r.raw, r.adj, r.pct.toFixed(2)].join(',') + '\n';
+        }
+        var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'cmp_scores_' + (pid || 'anonyme') + '_' + (date || 'date') + '.csv';
+        a.click();
+      }
+
+      function exportJSON(){
+        var pid = document.getElementById('pid').value || '';
+        var date = document.getElementById('pdate').value || '';
+        var ctx  = document.getElementById('context').value || '';
+        var res = computeScores(); if (!res) return;
+        var out = {
+          instrument: "CMP – Compétences Mentales de Performances",
+          version: "1.0.5",
+          participant: pid,
+          date: date,
+          contexte: ctx,
+          scores_pct: (function(){ var o={}; for (var i=0;i<dims.length;i++) o[dims[i]] = res.meansPct[i]; return o; })(),
+          moyenne_pct: res.globalPct,
+          items: res.itemRows
+        };
+        var blob = new Blob([JSON.stringify(out,null,2)], {type:'application/json'});
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'cmp_scores_' + (pid || 'anonyme') + '_' + (date || 'date') + '.json';
+        a.click();
+      }
+
+      document.getElementById('compute').addEventListener('click', function(){ var r = computeScores(); updateUI(r); });
+      document.getElementById('reset').addEventListener('click', resetForm);
+      document.getElementById('exportCsv').addEventListener('click', exportCSV);
+      document.getElementById('exportJson').addEventListener('click', exportJSON);
+    })();
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="export-pdf.js"></script>
+</body>
+</html>
