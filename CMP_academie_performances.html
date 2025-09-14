@@ -33,11 +33,7 @@
     .mini-banner { width: 240px; max-width: 35%; }
     @media (max-width:700px){ .mini-banner{ width: 180px; } }
   </style>
-<style>#detail-par-item{display:none !important;}@media print{#detail-par-item{display:none !important;}}</style></head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="export-pdf.js"></script>
-<script src="cmp_patch_hide_details.js"></script>
+<style>.no-print{display:none !important;}</style></head>
 <body>
 
   <div class="banner" style="margin-bottom:16px">
@@ -669,8 +665,7 @@
     <div class="actions">
       <button id="compute" class="btn primary">Calculer les scores</button>
       <button id="reset" class="btn">Réinitialiser</button>
-      <button id="exportCsv" class="btn">Exporter CSV</button>
-      <button id="exportJson" class="btn">Exporter JSON</button>
+      <button id="exportPdf" class="btn">Exporter PDF</button>
     </div>
   </div>
 
@@ -691,7 +686,7 @@
 
     <canvas id="radar" width="600" height="420" style="margin-top:16px;"></canvas>
 
-    <div class="scores" style="margin-top:16px">
+    <div id="detail-par-item" class="scores no-print" style="display:none;margin-top:16px">
       <h3 style="margin:0 0 8px">Détail par item (% après inversion si nécessaire)</h3>
       <table id="itemsTable">
         <thead><tr id="itemsHead"><th>Item</th><th>Dimension</th><th>Réponse (1–7)</th><th>Score ajusté</th><th>%</th></tr></thead>
@@ -845,5 +840,47 @@
       document.getElementById('exportJson').addEventListener('click', exportJSON);
     })();
   </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+document.getElementById('exportPdf')?.addEventListener('click', async function(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF('p','mm','a4');
+  const target = document.querySelector('#app') || document.body;
+  const canvas = await html2canvas(target, {scale:2, useCORS:true, ignoreElements: el => el.classList && el.classList.contains('no-print')});
+  const pageW = doc.internal.pageSize.getWidth();
+  const imgData = canvas.toDataURL('image/jpeg','1.0');
+  const imgProps = doc.getImageProperties(imgData);
+  const pageH = doc.internal.pageSize.getHeight();
+  const ratio = imgProps.height / imgProps.width;
+  let imgH = pageW * ratio;
+  if (imgH <= pageH) {
+    doc.addImage(imgData,'JPEG',0,0,pageW,imgH);
+  } else {
+    // paginate
+    const pxPerMm = canvas.width / pageW;
+    const usableH = pageH;
+    const sliceHpx = Math.ceil(usableH * pxPerMm);
+    let y=0, first=true;
+    const slice = document.createElement('canvas');
+    const ctx = slice.getContext('2d');
+    slice.width = canvas.width;
+    while (y < canvas.height){
+      const h = Math.min(sliceHpx, canvas.height - y);
+      slice.height = h;
+      ctx.clearRect(0,0,slice.width,slice.height);
+      ctx.drawImage(canvas, 0, y, canvas.width, h, 0, 0, slice.width, h);
+      const part = slice.toDataURL('image/jpeg','1.0');
+      if (!first) doc.addPage();
+      doc.addImage(part, 'JPEG', 0, 0, pageW, h/pxPerMm);
+      first = false;
+      y += h;
+    }
+  }
+  doc.save('CMP_rapport.pdf');
+});
+</script>
+
 </body>
 </html>
