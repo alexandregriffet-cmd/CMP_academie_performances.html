@@ -1,6 +1,1 @@
-#logo { 
-  display: block;
-  margin: 0 auto; /* Centre le logo */
-  max-width: 200px;
-}
-#report { font-family: Arial, sans-serif; text-align: justify; }
+.no-print{display:none!important}
