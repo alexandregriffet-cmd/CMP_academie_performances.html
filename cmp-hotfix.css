@@ -1,2 +1,1 @@
-/* Masque toute section marquée no-print sur écran + PDF */
-.no-print{ display:none !important; }
+.no-print{display:none!important}
