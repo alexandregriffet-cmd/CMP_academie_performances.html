@@ -1,6 +1,6 @@
-CMP (Compétences Mentales de Performances) — Style PMP
-- 60 questions affichées à la suite, sans noms de catégories ni indice (inversé).
-- Calcul des scores, radar 10 branches, export CSV/JSON.
+CMP (Compétences Mentales de Performances) — HTML pur
+- Zéro JSON externe : 60 questions directement écrites dans la page.
+- Fonctionne en local et sur GitHub Pages.
 Fichiers :
 - CMP_academie_performances.html
 - index.html (redirection vers la page principale)
